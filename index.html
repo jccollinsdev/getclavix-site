@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sansar's Dashboard</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f0f0f; color: #fff; min-height: 100vh; padding: 40px 20px; }
+    .container { max-width: 900px; margin: 0 auto; }
+    h1 { font-size: 28px; font-weight: 600; margin-bottom: 8px; }
+    .date { color: #888; margin-bottom: 40px; font-size: 14px; }
+    .section { background: #1a1a1a; border-radius: 12px; padding: 24px; margin-bottom: 20px; }
+    .section h2 { font-size: 16px; font-weight: 500; color: #888; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .task-list { list-style: none; }
+    .task-item { display: flex; align-items: center; padding: 12px 0; border-bottom: 1px solid #2a2a2a; gap: 12px; }
+    .task-item:last-child { border-bottom: none; }
+    .status-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+    .status-done { background: #22c55e; }
+    .status-todo { background: #f59e0b; }
+    .status-overdue { background: #ef4444; }
+    .task-name { flex: 1; font-size: 15px; }
+    .task-meta { color: #666; font-size: 13px; }
+    .task-tag { background: #2a2a2a; padding: 4px 10px; border-radius: 6px; font-size: 12px; color: #888; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Sansar's Dashboard</h1>
+    <div class="date" id="date"></div>
+
+    <div class="grid">
+      <div class="section">
+        <h2>RSM Tasks</h2>
+        <ul class="task-list" id="rsm-tasks"><li style="color:#666">Loading...</li></ul>
+      </div>
+      <div class="section">
+        <h2>School Tasks</h2>
+        <ul class="task-list" id="school-tasks"><li style="color:#666">Loading...</li></ul>
+      </div>
+      <div class="section">
+        <h2>Clavis</h2>
+        <ul class="task-list" id="clavis-tasks"><li style="color:#666">Loading...</li></ul>
+      </div>
+      <div class="section">
+        <h2>This Week</h2>
+        <ul class="task-list" id="week-tasks"><li style="color:#666">Loading...</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const TASKS_URL = 'tasks.json';
+    async function loadTasks() {
+      try {
+        const res = await fetch(TASKS_URL);
+        const data = await res.json();
+        renderTasks(data);
+      } catch(e) { console.error(e); }
+    }
+    function statusClass(s) {
+      if (s === 'done') return 'status-done';
+      if (s === 'overdue') return 'status-overdue';
+      return 'status-todo';
+    }
+    function renderTasks(data) {
+      const sections = {
+        'rsm-tasks': (data.rsm || []),
+        'school-tasks': (data.school || []),
+        'clavis-tasks': (data.clavis || []),
+        'week-tasks': (data.week || [])
+      };
+      for (const [id, tasks] of Object.entries(sections)) {
+        const el = document.getElementById(id);
+        if (!tasks.length) { el.innerHTML = '<li class="task-item"><span class="task-name" style="color:#666">Nothing here yet</span></li>'; continue; }
+        el.innerHTML = tasks.map(t => `<li class="task-item">
+          <span class="status-dot ${statusClass(t.status)}"></span>
+          <span class="task-name">${t.name}</span>
+          <span class="task-tag">${t.tag || ''}</span>
+          ${t.due ? `<span class="task-meta">${t.due}</span>` : ''}
+        </li>`).join('');
+      }
+    }
+    document.getElementById('date').textContent = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    loadTasks();
+  </script>
+</body>
+</html>
