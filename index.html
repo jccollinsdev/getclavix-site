@@ -4,20 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Clavix — Portfolio Intelligence</title>
+  <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #F5F4F0;
-      --dark: #0D0D0D;
-      --dark-mid: #1A1A1A;
+      --bg: #F7F6F2;
+      --dark: #0A0A0A;
+      --dark-soft: #1C1C1C;
+      --mid: #2E2E2E;
       --text: #111111;
       --text-muted: #6B6B6B;
-      --text-faint: #9A9A9A;
-      --accent: #C4A87C;
+      --text-faint: #9E9E9E;
+      --gold: #C4A87C;
+      --gold-dim: rgba(196,168,124,0.4);
     }
 
     html { scroll-behavior: smooth; }
@@ -39,46 +42,42 @@
       justify-content: space-between;
       align-items: center;
       padding: 20px 48px;
-      background: rgba(245,244,240,0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      background: rgba(247,246,242,0.9);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid rgba(0,0,0,0.06);
     }
-    .nav-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 20px;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      color: var(--text);
-      text-decoration: none;
+    .nav-logo img {
+      height: 36px;
+      width: auto;
     }
     .nav-links {
       display: flex;
-      gap: 36px;
+      gap: 40px;
       list-style: none;
     }
     .nav-links a {
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 400;
       color: var(--text-muted);
       text-decoration: none;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
       transition: color 0.2s;
     }
     .nav-links a:hover { color: var(--text); }
     .nav-cta {
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 500;
       color: var(--bg);
       background: var(--dark);
-      padding: 10px 22px;
+      padding: 11px 24px;
       border-radius: 6px;
       text-decoration: none;
-      letter-spacing: 0.02em;
+      letter-spacing: 0.04em;
       transition: opacity 0.2s;
     }
-    .nav-cta:hover { opacity: 0.8; }
+    .nav-cta:hover { opacity: 0.75; }
 
     /* ── Hero ── */
     .hero {
@@ -90,71 +89,67 @@
       text-align: center;
       padding: 140px 24px 80px;
     }
-    .hero-eyebrow {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--text-faint);
-      margin-bottom: 32px;
+    .hero-logo {
+      width: 280px;
+      max-width: 60vw;
+      margin-bottom: 56px;
+    }
+    .hero-logo img {
+      width: 100%;
+      height: auto;
     }
     .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(52px, 8vw, 96px);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(14px, 2vw, 18px);
       font-weight: 400;
-      line-height: 1.05;
-      letter-spacing: -0.03em;
-      color: var(--text);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--text-muted);
       margin-bottom: 16px;
     }
-    .hero h1 em {
-      font-style: italic;
-      color: var(--text-muted);
-    }
-    .hero-sub {
-      font-size: 18px;
+    .hero p {
+      font-size: 16px;
       font-weight: 300;
       color: var(--text-muted);
-      max-width: 480px;
-      margin-top: 20px;
-      line-height: 1.5;
+      max-width: 440px;
+      line-height: 1.6;
     }
 
     /* ── CTA Block ── */
     .cta-block {
       background: var(--dark);
       color: var(--bg);
-      padding: 72px 24px;
+      padding: 80px 24px;
       text-align: center;
     }
     .cta-label {
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 500;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 20px;
+      color: var(--gold);
+      margin-bottom: 24px;
     }
     .cta-headline {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(28px, 4vw, 44px);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(28px, 4vw, 48px);
       font-weight: 400;
       line-height: 1.15;
       letter-spacing: -0.02em;
-      margin-bottom: 40px;
+      margin-bottom: 44px;
     }
     .cta-form {
       display: flex;
       gap: 0;
-      max-width: 420px;
+      max-width: 440px;
       margin: 0 auto;
-      border: 1px solid rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.12);
       border-radius: 8px;
       overflow: hidden;
     }
     .cta-form input {
       flex: 1;
-      padding: 16px 20px;
+      padding: 18px 22px;
       background: transparent;
       border: none;
       outline: none;
@@ -163,74 +158,73 @@
       color: var(--bg);
       font-weight: 300;
     }
-    .cta-form input::placeholder { color: rgba(255,255,255,0.35); }
+    .cta-form input::placeholder { color: rgba(255,255,255,0.3); }
     .cta-form button {
-      padding: 16px 28px;
-      background: var(--accent);
+      padding: 18px 30px;
+      background: var(--gold);
       border: none;
       font-family: 'Inter', sans-serif;
-      font-size: 13px;
+      font-size: 11px;
       font-weight: 600;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--dark);
       cursor: pointer;
       transition: opacity 0.2s;
       white-space: nowrap;
     }
-    .cta-form button:hover { opacity: 0.85; }
+    .cta-form button:hover { opacity: 0.82; }
     .cta-trust {
       display: flex;
       justify-content: center;
-      gap: 32px;
-      margin-top: 20px;
-      font-size: 12px;
-      color: rgba(255,255,255,0.4);
-      letter-spacing: 0.02em;
+      gap: 28px;
+      margin-top: 22px;
+      font-size: 11px;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 0.04em;
     }
-    .cta-trust span { display: flex; align-items: center; gap: 6px; }
 
     /* ── How It Works ── */
     .how {
-      background: var(--dark-mid);
+      background: var(--dark-soft);
       color: var(--bg);
-      padding: 96px 24px;
+      padding: 100px 24px;
     }
     .section-eyebrow {
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 500;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 56px;
+      color: var(--gold-dim);
+      margin-bottom: 60px;
       text-align: center;
     }
     .how-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 1px;
-      max-width: 960px;
+      max-width: 980px;
       margin: 0 auto;
-      border: 1px solid rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.07);
       border-radius: 12px;
       overflow: hidden;
     }
     .how-item {
-      background: var(--dark-mid);
-      padding: 48px 40px;
+      background: var(--dark-soft);
+      padding: 52px 44px;
       text-align: center;
     }
     .how-num {
-      font-family: 'Inter', monospace;
-      font-size: 11px;
+      font-family: 'Space Grotesk', monospace;
+      font-size: 10px;
       font-weight: 400;
-      letter-spacing: 0.12em;
-      color: var(--accent);
+      letter-spacing: 0.14em;
+      color: var(--gold);
       margin-bottom: 28px;
     }
     .how-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 24px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 22px;
       font-weight: 400;
       margin-bottom: 16px;
       letter-spacing: -0.01em;
@@ -238,25 +232,25 @@
     .how-desc {
       font-size: 14px;
       font-weight: 300;
-      color: rgba(255,255,255,0.5);
-      line-height: 1.65;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.7;
     }
 
     /* ── Signals ── */
     .signals {
       background: var(--dark);
       color: var(--bg);
-      padding: 96px 24px;
+      padding: 100px 24px;
       text-align: center;
     }
     .signals-headline {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(32px, 5vw, 56px);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(28px, 4.5vw, 52px);
       font-weight: 400;
       line-height: 1.1;
       letter-spacing: -0.025em;
-      margin-bottom: 56px;
-      max-width: 700px;
+      margin-bottom: 60px;
+      max-width: 720px;
       margin-left: auto;
       margin-right: auto;
     }
@@ -265,70 +259,67 @@
       justify-content: center;
       flex-wrap: wrap;
       gap: 12px;
-      max-width: 720px;
-      margin: 0 auto 64px;
+      max-width: 760px;
+      margin: 0 auto 68px;
     }
     .signal-btn {
-      padding: 14px 28px;
-      border: 1px solid rgba(255,255,255,0.18);
+      padding: 15px 30px;
+      border: 1px solid rgba(255,255,255,0.15);
       border-radius: 6px;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 500;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--bg);
       background: transparent;
       cursor: default;
     }
     .signal-btn.strong {
-      border-color: rgba(194,168,124,0.5);
-      color: var(--accent);
+      border-color: var(--gold-dim);
+      color: var(--gold);
     }
     .signals-closing {
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 300;
-      color: rgba(255,255,255,0.45);
-      max-width: 420px;
+      color: rgba(255,255,255,0.4);
+      max-width: 400px;
       margin: 0 auto;
-      line-height: 1.6;
+      line-height: 1.7;
     }
 
     /* ── Final CTA ── */
     .final-cta {
       background: var(--bg);
-      padding: 96px 24px;
+      padding: 100px 24px;
       text-align: center;
     }
     .final-cta h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(32px, 4vw, 52px);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(28px, 4vw, 48px);
       font-weight: 400;
       letter-spacing: -0.025em;
       margin-bottom: 16px;
       color: var(--text);
     }
     .final-cta p {
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 300;
       color: var(--text-muted);
-      margin-bottom: 40px;
+      margin-bottom: 44px;
     }
 
     /* ── Footer ── */
     footer {
       border-top: 1px solid rgba(0,0,0,0.08);
-      padding: 40px 48px;
+      padding: 44px 48px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       background: var(--bg);
     }
-    .footer-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--text);
-      letter-spacing: -0.02em;
+    .footer-logo img {
+      height: 28px;
+      width: auto;
     }
     .footer-copy {
       font-size: 12px;
@@ -336,13 +327,13 @@
     }
     .footer-links {
       display: flex;
-      gap: 28px;
+      gap: 32px;
     }
     .footer-links a {
-      font-size: 12px;
+      font-size: 11px;
       color: var(--text-faint);
       text-decoration: none;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
       transition: color 0.2s;
     }
@@ -352,10 +343,11 @@
     @media (max-width: 768px) {
       nav { padding: 16px 24px; }
       .nav-links { display: none; }
-      .hero { padding: 120px 20px 60px; }
+      .hero { padding: 110px 20px 60px; }
+      .hero-logo { width: 200px; }
       .how-grid { grid-template-columns: 1fr; }
       .how-item { padding: 40px 28px; }
-      .cta-trust { flex-direction: column; gap: 10px; }
+      .cta-trust { flex-direction: column; gap: 12px; }
       footer { flex-direction: column; gap: 20px; text-align: center; padding: 32px 24px; }
       .footer-links { flex-wrap: wrap; justify-content: center; }
     }
@@ -364,19 +356,23 @@
 <body>
 
   <nav>
-    <a href="#" class="nav-logo">Clavix</a>
+    <a href="#" class="nav-logo">
+      <img src="img/logo.svg" alt="Clavix">
+    </a>
     <ul class="nav-links">
       <li><a href="#how">How it works</a></li>
       <li><a href="#signals">Signals</a></li>
-      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#cta">Early access</a></li>
     </ul>
     <a href="#cta" class="nav-cta">Get early access</a>
   </nav>
 
   <section class="hero">
-    <p class="hero-eyebrow">Portfolio Intelligence</p>
-    <h1>Know exactly<br>what to <em>do</em>.</h1>
-    <p class="hero-sub">Clavix translates portfolio risk into clear, actionable signals — so you stop guessing and start acting.</p>
+    <div class="hero-logo">
+      <img src="img/logo.svg" alt="Clavix">
+    </div>
+    <h1>Portfolio Intelligence</h1>
+    <p>Clavix translates portfolio risk into clear, actionable signals — so you stop guessing and start acting.</p>
   </section>
 
   <section class="cta-block" id="cta">
@@ -428,14 +424,16 @@
     <p class="signals-closing">Every morning, your portfolio speaks. You listen. You act.</p>
   </section>
 
-  <section class="final-cta" id="pricing">
+  <section class="final-cta">
     <h2>Ready to see clearly?</h2>
     <p>Join the waitlist and be first to access Clavix.</p>
     <a href="#cta" class="nav-cta">Get early access</a>
   </section>
 
   <footer>
-    <span class="footer-logo">Clavix</span>
+    <a href="#" class="footer-logo">
+      <img src="img/logo.svg" alt="Clavix">
+    </a>
     <p class="footer-copy">© 2026 Clavix. All rights reserved.</p>
     <div class="footer-links">
       <a href="#">Privacy</a>

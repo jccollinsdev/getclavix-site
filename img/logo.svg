@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="950" viewBox="0 0 1200 950">
+  <rect width="100%" height="100%" fill="white"/>
+
+  <!-- Icon -->
+  <g fill="none" stroke="#000" stroke-width="30" stroke-linecap="square" stroke-linejoin="miter">
+    <!-- Improved C -->
+    <path d="M520 180 H260 V580 H520" />
+    <!-- Heartbeat -->
+    <path d="M120 380 H320 L370 270 L430 520 L500 300 L560 380 H760" />
+  </g>
+
+  <!-- Wordmark -->
+  <g fill="#000" transform="translate(200 705)">
+    <!-- C -->
+    <path d="M0 0 H95 V28 H28 V142 H95 V170 H0 Z"/>
+
+    <!-- L -->
+    <path d="M135 0 H163 V142 H238 V170 H135 Z"/>
+
+    <!-- A -->
+    <path d="M292 170 L350 0 H387 L445 170 H415 L401 128 H336 L322 170 Z M344 101 H393 L369 30 Z"/>
+
+    <!-- V -->
+    <path d="M482 0 H514 L565 141 L616 0 H648 L585 170 H545 Z"/>
+
+    <!-- I -->
+    <path d="M700 0 H728 V170 H700 Z"/>
+
+    <!-- X -->
+    <path d="M778 0 H812 L860 66 L908 0 H942 L879 85 L945 170 H910 L860 104 L810 170 H776 L842 85 Z"/>
+  </g>
+</svg>
