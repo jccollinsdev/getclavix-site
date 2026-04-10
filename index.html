@@ -884,7 +884,10 @@
 </footer>
 
 <script>
- function signup(inputId, successId) {
+ const SUPABASE_URL = 'https://cmmtzrulxhhmndwimrlc.supabase.co';
+ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNtbXR6cnVseGhobW5kd2ltcmxjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ1MTAzNjksImV4cCI6MjA5MDA4NjM2OX0.Ch26oirSyLOuyhj6IGDUXwO1bTJEnvh2pGeA_tnmw4I';
+
+ async function signup(inputId, successId) {
  const input = document.getElementById(inputId);
  const msg = document.getElementById(successId);
  const val = input.value.trim();
@@ -893,10 +896,42 @@
  input.focus();
  return;
  }
- input.style.display = 'none';
+ input.disabled = true;
  const btn = input.nextElementSibling;
+ if (btn && btn.tagName === 'BUTTON') btn.disabled = true;
+
+ try {
+ const res = await fetch(SUPABASE_URL + '/rest/v1/waitlist', {
+ method: 'POST',
+ headers: {
+ 'Content-Type': 'application/json',
+ 'apikey': SUPABASE_ANON_KEY,
+ 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+ 'Prefer': 'return=representation',
+ },
+ body: JSON.stringify({ email: val }),
+ });
+ if (res.status === 409) {
+ input.style.borderColor = '#c0392b';
+ input.disabled = false;
+ if (btn && btn.tagName === 'BUTTON') btn.disabled = false;
+ msg.textContent = 'This email is already on the list.';
+ msg.style.display = 'block';
+ msg.style.color = '#c0392b';
+ return;
+ }
+ if (!res.ok) throw new Error('Server error');
+ input.style.display = 'none';
  if (btn && btn.tagName === 'BUTTON') btn.style.display = 'none';
  msg.style.display = 'block';
+ } catch (e) {
+ input.style.borderColor = '#c0392b';
+ input.disabled = false;
+ if (btn && btn.tagName === 'BUTTON') btn.disabled = false;
+ msg.textContent = 'Something went wrong. Please try again.';
+ msg.style.display = 'block';
+ msg.style.color = '#c0392b';
+ }
  }
 
  const observer = new IntersectionObserver((entries) => {
