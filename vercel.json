@@ -6,6 +6,20 @@
     { "source": "/refund", "destination": "/refund.html" },
     { "source": "/methodology", "destination": "/methodology.html" }
   ],
-  "outputDirectory": "."
+  "outputDirectory": ".",
+  "cleanUrls": true,
+  "headers": [
+    {
+      "source": "/sitemap.xml",
+      "headers": [
+        { "key": "Content-Type", "value": "application/xml" }
+      ]
+    },
+    {
+      "source": "/llms.txt",
+      "headers": [
+        { "key": "Content-Type", "value": "text/plain" }
+      ]
+    }
+  ]
 }
-# force fresh deploy
