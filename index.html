@@ -268,7 +268,7 @@
 
  /* ── SECTION SHARED ── */
  section {
- padding: 7rem 4rem;
+ padding: 5rem 4rem;
  border-top: 0.5px solid var(--border);
  }
 
@@ -479,20 +479,30 @@
  /* ── SEE THE APP ── */
  section#app {
  background: var(--bg-primary);
+ padding-bottom: 5rem;
  }
 
- .screenshots-grid {
- display: grid;
- grid-template-columns: repeat(3, 1fr);
- gap: 1.5rem;
- margin-top: 4rem;
+ .screenshots-scroll {
+ display: flex;
+ gap: 1rem;
+ margin-top: 3rem;
+ overflow-x: auto;
+ -webkit-overflow-scrolling: touch;
+ scroll-snap-type: x mandatory;
+ padding-bottom: 1rem;
+ /* hide scrollbar */
+ scrollbar-width: none;
+ -ms-overflow-style: none;
  }
+ .screenshots-scroll::-webkit-scrollbar { display: none; }
 
  .screenshot-card {
+ flex: 0 0 200px;
  background: var(--surface);
  border: 0.5px solid var(--border);
  border-radius: 12px;
  overflow: hidden;
+ scroll-snap-align: start;
  transition: border-color 0.2s, transform 0.2s;
  }
 
@@ -508,12 +518,15 @@
  }
 
  .screenshot-label {
- padding: 0.8rem 1rem;
- font-size: 0.72rem;
+ padding: 0.7rem 0.9rem;
+ font-size: 0.65rem;
  letter-spacing: 0.08em;
  text-transform: uppercase;
  color: var(--text-sec);
  border-top: 0.5px solid var(--border);
+ white-space: nowrap;
+ overflow: hidden;
+ text-overflow: ellipsis;
  }
 
  /* ── OFFER / CTA ── */
@@ -675,7 +688,8 @@
  .signals-right { padding: 3rem 1.5rem; }
  .signal-chips { gap: 10px; }
 
- .screenshots-grid { grid-template-columns: 1fr; }
+ .screenshots-grid { display: none; } /* desktop only */
+ .screenshots-scroll { display: flex; } /* mobile horizontal scroll */
 
  .digest-levels { grid-template-columns: 1fr; gap: 3rem; }
 
@@ -693,41 +707,42 @@
  .nav-logo img { height: 30px; }
 
  .hero { min-height: auto; }
- .hero-left { padding: 5rem 1.25rem 4rem; }
+ .hero-left { padding: 4rem 1.25rem 3rem; }
  .hero-kicker { font-size: 0.65rem; }
- .hero-headline { font-size: 1.9rem; letter-spacing: -0.01em; }
- .hero-body { font-size: 0.88rem; line-height: 1.7; }
- .hero-form { gap: 10px; }
- .hero-input { height: 50px; min-height: 50px; font-size: 16px; padding: 0 1rem; -webkit-appearance: none; border-radius: 0; }
- .hero-btn { height: 50px; min-height: 50px; font-size: 0.8rem; }
- .hero-smallprint { font-size: 0.68rem; }
+ .hero-headline { font-size: 1.75rem; letter-spacing: -0.01em; }
+ .hero-body { font-size: 0.85rem; line-height: 1.65; margin-bottom: 2rem; }
+ .hero-form { gap: 8px; }
+ .hero-input { height: 48px; min-height: 48px; font-size: 16px; padding: 0 1rem; -webkit-appearance: none; border-radius: 0; }
+ .hero-btn { height: 48px; min-height: 48px; font-size: 0.78rem; }
+ .hero-smallprint { font-size: 0.65rem; }
 
- section { padding: 4rem 1.25rem; }
- .section-tag { font-size: 0.62rem; }
- .section-headline { font-size: 1.6rem; }
+ section { padding: 3.5rem 1.25rem; }
+ .section-tag { font-size: 0.6rem; }
+ .section-headline { font-size: 1.5rem; }
 
- .how-cell { padding: 1.5rem 1.25rem; }
- .how-num { font-size: 2rem; }
- .how-title { font-size: 1rem; }
- .how-desc { font-size: 0.82rem; }
+ .how-cell { padding: 1.25rem 1.25rem; }
+ .how-num { font-size: 1.8rem; margin-bottom: 1rem; }
+ .how-title { font-size: 0.95rem; margin-bottom: 0.5rem; }
+ .how-desc { font-size: 0.8rem; }
 
- .signals-left { padding: 3.5rem 1.25rem; }
- .signals-right { padding: 2.5rem 1.25rem; }
- .signals-body { font-size: 0.88rem; }
- .chip-text { font-size: 0.78rem; }
- .chip-action { min-width: 44px; font-size: 0.62rem; }
+ .signals-left { padding: 3rem 1.25rem; }
+ .signals-right { padding: 2rem 1.25rem; }
+ .signals-body { font-size: 0.85rem; }
+ .chip-text { font-size: 0.75rem; }
+ .chip-action { min-width: 44px; font-size: 0.6rem; }
 
- .screenshots-grid { gap: 1rem; }
+ .screenshots-scroll { margin-top: 2.5rem; }
+ .screenshot-card { flex: 0 0 170px; }
  .screenshot-card:hover { transform: none; }
 
- .digest-levels { gap: 2.5rem; }
- .digest-item { font-size: 0.8rem; }
+ .digest-levels { gap: 2rem; }
+ .digest-item { font-size: 0.78rem; }
 
- .offer-section { padding: 5rem 1.25rem; }
- .offer-body { font-size: 0.88rem; }
+ .offer-section { padding: 4rem 1.25rem; }
+ .offer-body { font-size: 0.85rem; }
  .offer-form { max-width: 100%; }
- .offer-input { height: 50px; min-height: 50px; font-size: 16px; padding: 0 1rem; -webkit-appearance: none; border-radius: 0; }
- .offer-btn { height: 50px; font-size: 0.8rem; }
+ .offer-input { height: 48px; min-height: 48px; font-size: 16px; padding: 0 1rem; -webkit-appearance: none; border-radius: 0; }
+ .offer-btn { height: 48px; font-size: 0.78rem; }
 
  footer { padding: 1.5rem 1.25rem; }
  .footer-links { gap: 1.5rem; }
@@ -895,6 +910,20 @@
  <div class="screenshot-card">
  <img src="img/screenshots/risk-dimensions.jpg" alt="Clavix risk dimensions breakdown" loading="lazy" />
  <div class="screenshot-label">Risk dimensions — 5-factor breakdown</div>
+ </div>
+ </div>
+ <div class="screenshots-scroll">
+ <div class="screenshot-card">
+ <img src="img/screenshots/alerts-feed.jpg" alt="Clavix alerts feed" loading="lazy" />
+ <div class="screenshot-label">Alerts</div>
+ </div>
+ <div class="screenshot-card">
+ <img src="img/screenshots/position-detail.jpg" alt="Clavix position detail with chart" loading="lazy" />
+ <div class="screenshot-label">Position detail</div>
+ </div>
+ <div class="screenshot-card">
+ <img src="img/screenshots/risk-dimensions.jpg" alt="Clavix risk dimensions breakdown" loading="lazy" />
+ <div class="screenshot-label">Risk dimensions</div>
  </div>
  </div>
 </section>
