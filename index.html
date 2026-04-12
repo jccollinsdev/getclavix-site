@@ -18,7 +18,6 @@
  --border:       #2A3140;
  --text-pri:     #E8ECF0;
  --text-sec:     #7A8799;
- --text-muted:   #7A8799;
 
  --risk-a: #1D9E75;
  --risk-b: #639922;
@@ -115,10 +114,7 @@
  width: 22px;
  height: 1.5px;
  background: var(--text-pri);
- transition: opacity 0.2s, transform 0.2s;
  }
-
- .nav-links.open { display: flex; flex-direction: column; gap: 1.5rem; padding: 1.5rem 1.5rem 1.5rem 0; }
 
  /* ── HERO ── */
  .hero {
@@ -138,7 +134,6 @@
  }
 
  .hero-kicker {
- font-family: var(--font-ui);
  font-size: 0.7rem;
  letter-spacing: 0.16em;
  text-transform: uppercase;
@@ -158,7 +153,6 @@
  }
 
  .hero-headline {
- font-family: var(--font-ui);
  font-size: clamp(2.4rem, 4vw, 3.6rem);
  font-weight: 400;
  line-height: 1.12;
@@ -206,7 +200,6 @@
  outline: none;
  -webkit-appearance: none;
  border-radius: 0;
- box-sizing: border-box;
  display: flex;
  align-items: center;
  }
@@ -240,133 +233,38 @@
  letter-spacing: 0.04em;
  }
 
- /* hero right — dark signal panel */
+ /* hero right — app screenshot */
  .hero-right {
  display: flex;
  align-items: center;
  justify-content: center;
- padding: 6rem 4rem;
+ padding: 4rem 3rem;
  background: var(--surface);
  position: relative;
+ overflow: hidden;
  }
 
- .signal-card {
+ .hero-phone {
  width: 100%;
- max-width: 380px;
+ max-width: 320px;
+ border-radius: 36px;
+ border: 1.5px solid var(--border);
+ box-shadow: 0 0 60px rgba(0,0,0,0.6), 0 0 120px rgba(29,158,117,0.08);
+ display: block;
  }
 
- .signal-header {
- display: flex;
- justify-content: space-between;
- align-items: center;
- margin-bottom: 2rem;
- padding-bottom: 1rem;
- border-bottom: 0.5px solid var(--border);
- }
-
- .signal-label {
+ .hero-phone-caption {
+ position: absolute;
+ bottom: 2rem;
+ left: 0;
+ right: 0;
+ text-align: center;
  font-size: 0.68rem;
- letter-spacing: 0.14em;
- text-transform: uppercase;
- color: var(--text-sec);
- }
-
- .signal-date {
- font-size: 0.68rem;
- letter-spacing: 0.06em;
- color: var(--text-sec);
- opacity: 0.6;
- }
-
- .score-block {
- display: flex;
- align-items: baseline;
- gap: 1rem;
- margin-bottom: 0.6rem;
- }
-
- .score-num {
- font-family: var(--font-mono);
- font-size: 5rem;
- font-weight: 400;
- line-height: 1;
- letter-spacing: -0.04em;
- color: var(--text-pri);
- }
-
- .score-delta {
- font-family: var(--font-mono);
- font-size: 0.82rem;
- color: var(--risk-d);
- letter-spacing: 0.04em;
- }
-
- .score-interp {
- font-size: 0.88rem;
- color: var(--text-sec);
- line-height: 1.6;
- margin-bottom: 2rem;
- font-style: italic;
- }
-
- .holdings-list {
- display: flex;
- flex-direction: column;
- gap: 0;
- margin-bottom: 2rem;
- }
-
- .holding-row {
- display: grid;
- grid-template-columns: 1fr auto auto auto;
- gap: 1rem;
- align-items: center;
- padding: 0.65rem 0;
- border-bottom: 0.5px solid var(--border);
- font-size: 0.8rem;
- }
-
- .holding-ticker {
- font-family: var(--font-ui);
- font-weight: 500;
- letter-spacing: 0.06em;
- font-size: 0.75rem;
- text-transform: uppercase;
- color: var(--text-pri);
- }
-
- .holding-grade {
- font-family: var(--font-mono);
- font-size: 0.7rem;
- font-weight: 500;
- letter-spacing: 0.06em;
- padding: 2px 7px;
- border: 0.5px solid var(--border);
- }
-
- .grade-a { background: var(--grade-ab); color: var(--grade-at); border-color: transparent; }
- .grade-b { background: var(--grade-bb); color: var(--grade-bt); border-color: transparent; }
- .grade-c { background: var(--grade-cb); color: var(--grade-ct); border-color: transparent; }
- .grade-d { background: var(--grade-db); color: var(--grade-dt); border-color: transparent; }
- .grade-f { background: var(--grade-fb); color: var(--grade-ft); border-color: transparent; }
-
- .holding-trend-up   { color: var(--risk-a); font-family: var(--font-mono); font-size: 0.75rem; }
- .holding-trend-down { color: var(--risk-f); font-family: var(--font-mono); font-size: 0.75rem; }
- .holding-trend-flat { color: var(--text-sec); font-family: var(--font-mono); font-size: 0.75rem; }
-
- .holding-action {
- font-family: var(--font-ui);
- font-size: 0.65rem;
  letter-spacing: 0.1em;
  text-transform: uppercase;
- font-weight: 500;
+ color: var(--text-sec);
+ opacity: 0.5;
  }
-
- .action-exit    { color: var(--risk-f); }
- .action-monitor { color: var(--risk-c); }
- .action-add     { color: var(--risk-a); }
- .action-ignore  { color: var(--text-sec); }
- .action-reduce  { color: var(--risk-d); }
 
  /* ── SECTION SHARED ── */
  section {
@@ -414,7 +312,6 @@
  padding: 2.5rem 2rem;
  border-right: 0.5px solid var(--border);
  background: var(--surface);
- position: relative;
  }
 
  .how-cell:last-child { border-right: none; }
@@ -465,8 +362,17 @@
  padding: 7rem 4rem;
  background: var(--surface);
  display: flex;
- flex-direction: column;
+ align-items: center;
  justify-content: center;
+ }
+
+ .signal-phone {
+ width: 100%;
+ max-width: 280px;
+ border-radius: 32px;
+ border: 1.5px solid var(--border);
+ box-shadow: 0 0 40px rgba(0,0,0,0.5);
+ display: block;
  }
 
  .signal-chips {
@@ -537,9 +443,7 @@
  margin-top: 4rem;
  }
 
- .digest-level {
- padding: 0;
- }
+ .digest-level { padding: 0; }
 
  .digest-level-tag {
  font-size: 0.65rem;
@@ -571,6 +475,46 @@
  }
 
  .digest-item:last-child { border-bottom: none; }
+
+ /* ── SEE THE APP ── */
+ section#app {
+ background: var(--bg-primary);
+ }
+
+ .screenshots-grid {
+ display: grid;
+ grid-template-columns: repeat(3, 1fr);
+ gap: 1.5rem;
+ margin-top: 4rem;
+ }
+
+ .screenshot-card {
+ background: var(--surface);
+ border: 0.5px solid var(--border);
+ border-radius: 12px;
+ overflow: hidden;
+ transition: border-color 0.2s, transform 0.2s;
+ }
+
+ .screenshot-card:hover {
+ border-color: var(--text-sec);
+ transform: translateY(-4px);
+ }
+
+ .screenshot-card img {
+ width: 100%;
+ display: block;
+ border-radius: 12px;
+ }
+
+ .screenshot-label {
+ padding: 0.8rem 1rem;
+ font-size: 0.72rem;
+ letter-spacing: 0.08em;
+ text-transform: uppercase;
+ color: var(--text-sec);
+ border-top: 0.5px solid var(--border);
+ }
 
  /* ── OFFER / CTA ── */
  .offer-section {
@@ -720,8 +664,10 @@
 
  .signals-section { grid-template-columns: 1fr; }
  .signals-left { padding: 4rem 1.5rem; border-right: none; }
- .signals-right { padding: 4rem 1.5rem; }
+ .signals-right { padding: 3rem 1.5rem; }
  .signal-chips { gap: 10px; }
+
+ .screenshots-grid { grid-template-columns: 1fr; }
 
  .digest-levels { grid-template-columns: 1fr; gap: 3rem; }
 
@@ -758,10 +704,13 @@
  .how-desc { font-size: 0.82rem; }
 
  .signals-left { padding: 3.5rem 1.25rem; }
- .signals-right { padding: 3.5rem 1.25rem; }
+ .signals-right { padding: 2.5rem 1.25rem; }
  .signals-body { font-size: 0.88rem; }
  .chip-text { font-size: 0.78rem; }
  .chip-action { min-width: 44px; font-size: 0.62rem; }
+
+ .screenshots-grid { gap: 1rem; }
+ .screenshot-card:hover { transform: none; }
 
  .digest-levels { gap: 2.5rem; }
  .digest-item { font-size: 0.8rem; }
@@ -774,17 +723,6 @@
 
  footer { padding: 1.5rem 1.25rem; }
  .footer-links { gap: 1.5rem; }
-
- .score-num { font-size: 3.8rem; }
- .holding-row { font-size: 0.75rem; padding: 0.55rem 0; }
- .holding-ticker { font-size: 0.68rem; }
- .holding-grade { font-size: 0.62rem; padding: 2px 5px; }
- }
-
- @media (max-width: 380px) {
- .hero-headline { font-size: 1.65rem; }
- .hero-body { font-size: 0.84rem; }
- .offer-form { max-width: 280px; }
  }
 
  /* success state */
@@ -810,6 +748,7 @@
  <ul class="nav-links">
  <li><a href="#how" onclick="document.querySelector('.nav-links').classList.remove('open')">How it works</a></li>
  <li><a href="#signals" onclick="document.querySelector('.nav-links').classList.remove('open')">Signals</a></li>
+ <li><a href="#app" onclick="document.querySelector('.nav-links').classList.remove('open')">See the app</a></li>
  </ul>
  <a href="#offer" class="nav-cta">Get early access</a>
 </nav>
@@ -836,51 +775,8 @@
  </div>
 
  <div class="hero-right">
- <div class="signal-card">
- <div class="signal-header">
- <span class="signal-label">Portfolio snapshot</span>
- <span class="signal-date">Today, 09:41</span>
- </div>
-
- <div class="score-block">
- <span class="score-num">64</span>
- <span class="score-delta">&#8595; 7 pts</span>
- </div>
- <p class="score-interp">&ldquo;Elevated risk. Two positions exposed to macro headwinds; one requires action today.&rdquo;</p>
-
- <div class="holdings-list">
- <div class="holding-row">
- <span class="holding-ticker">NVDA</span>
- <span class="holding-grade grade-b">B+</span>
- <span class="holding-trend-up">&#8593;</span>
- <span class="holding-action action-monitor">Monitor</span>
- </div>
- <div class="holding-row">
- <span class="holding-ticker">SIVB</span>
- <span class="holding-grade grade-d">D</span>
- <span class="holding-trend-down">&#8595;&#8595;</span>
- <span class="holding-action action-exit">Exit</span>
- </div>
- <div class="holding-row">
- <span class="holding-ticker">AAPL</span>
- <span class="holding-grade grade-a">A&minus;</span>
- <span class="holding-trend-flat">&#8594;</span>
- <span class="holding-action action-ignore">Ignore</span>
- </div>
- <div class="holding-row">
- <span class="holding-ticker">TLT</span>
- <span class="holding-grade grade-c">C+</span>
- <span class="holding-trend-down">&#8595;</span>
- <span class="holding-action action-reduce">Reduce</span>
- </div>
- <div class="holding-row">
- <span class="holding-ticker">GLD</span>
- <span class="holding-grade grade-a">A</span>
- <span class="holding-trend-up">&#8593;</span>
- <span class="holding-action action-add">Add</span>
- </div>
- </div>
- </div>
+ <img class="hero-phone" src="img/screenshots/hero-dashboard.jpg" alt="Clavix app dashboard — portfolio risk score" />
+ <div class="hero-phone-caption">Portfolio Risk &middot; Holdings &middot; Digest</div>
  </div>
 </section>
 
@@ -916,10 +812,7 @@
  <p class="signals-body">
  Every market event is filtered through your portfolio and translated into one clear action. What matters, what doesn't, and what to do next.
  </p>
- </div>
-
- <div class="signals-right">
- <div class="signal-chips">
+ <div class="signal-chips" style="margin-top:2rem;">
  <div class="signal-chip chip-ignore">
  <span class="chip-action">Ignore</span>
  <div class="chip-divider"></div>
@@ -947,6 +840,10 @@
  </div>
  </div>
  </div>
+
+ <div class="signals-right">
+ <img class="signal-phone" src="img/screenshots/digest-what-to-do.jpg" alt="Clavix digest — what to do next" />
+ </div>
 </div>
 
 <!-- DIGEST -->
@@ -969,6 +866,27 @@
  <div class="how-num">03</div>
  <h3 class="how-title">Clear Actions</h3>
  <p class="how-desc">Each position is translated into a clear action &mdash; ignore, monitor, reduce, exit, or add &mdash; so you know exactly what to do next.</p>
+ </div>
+ </div>
+</section>
+
+<!-- SEE THE APP -->
+<section id="app">
+ <div class="section-tag">See the app</div>
+ <h2 class="section-headline">Every screen designed to<br>keep you ahead</h2>
+
+ <div class="screenshots-grid">
+ <div class="screenshot-card">
+ <img src="img/screenshots/alerts-feed.jpg" alt="Clavix alerts feed" loading="lazy" />
+ <div class="screenshot-label">Alerts — critical, warning, and info</div>
+ </div>
+ <div class="screenshot-card">
+ <img src="img/screenshots/position-detail.jpg" alt="Clavix position detail with chart" loading="lazy" />
+ <div class="screenshot-label">Position detail — risk score &amp; chart</div>
+ </div>
+ <div class="screenshot-card">
+ <img src="img/screenshots/risk-dimensions.jpg" alt="Clavix risk dimensions breakdown" loading="lazy" />
+ <div class="screenshot-label">Risk dimensions — 5-factor breakdown</div>
  </div>
  </div>
 </section>
@@ -1065,7 +983,7 @@
  });
  }, { threshold: 0.15 });
 
- document.querySelectorAll('.how-cell, .signal-chip').forEach(el => {
+ document.querySelectorAll('.how-cell, .signal-chip, .screenshot-card').forEach(el => {
  el.style.opacity = '0';
  el.style.transform = 'translateY(16px)';
  observer.observe(el);
