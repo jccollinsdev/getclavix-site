@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Methodology — Clavix</title>
+<meta name="description" content="How Clavix calculates portfolio risk scores, selects signals, and generates action recommendations." />
+<meta property="og:title" content="Methodology — Clavix" />
+<meta property="og:description" content="How Clavix calculates portfolio risk scores, selects signals, and generates action recommendations." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://getclavix.com/methodology" />
+<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg-primary: #0F1117; --surface: #161B24; --surface-el: #1E2530; --border: #2A3140;
+    --text-pri: #E8ECF0; --text-sec: #7A8799;
+    --risk-a: #1D9E75; --risk-b: #639922; --risk-c: #BA7517; --risk-d: #D85A30; --risk-f: #C8342B;
+    --font-ui: 'Inter', sans-serif; --font-mono: 'JetBrains Mono', monospace;
+  }
+  body { background: var(--bg-primary); color: var(--text-pri); font-family: var(--font-ui); font-weight: 400; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 3rem; height: 64px; background: rgba(15,17,23,0.92); backdrop-filter: blur(12px); border-bottom: 0.5px solid var(--border); }
+  .nav-logo img { display: block; height: 36px; width: auto; }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-sec); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--text-pri); }
+  .nav-cta { display: inline-block; font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; padding: 9px 22px; border: 1px solid var(--border); color: var(--text-pri); text-decoration: none; transition: background 0.2s, border-color 0.2s; }
+  .nav-cta:hover { background: var(--surface-el); border-color: var(--text-sec); }
+  .page-wrapper { max-width: 720px; margin: 0 auto; padding: 8rem 1.5rem 4rem; }
+  .page-header { margin-bottom: 3rem; }
+  .page-header h1 { font-size: 2rem; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+  .page-header p { color: var(--text-sec); font-size: 0.9rem; }
+  .page-header .last-updated { color: var(--text-sec); font-size: 0.8rem; margin-top: 0.5rem; }
+  .methodology-section { margin-bottom: 3rem; }
+  .methodology-section h2 { font-size: 1.15rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-pri); }
+  .methodology-section p { color: var(--text-sec); line-height: 1.75; font-size: 0.9rem; margin-bottom: 1rem; }
+  .signal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem; }
+  .signal-chip { background: var(--surface-el); border: 1px solid var(--border); border-radius: 6px; padding: 1rem; }
+  .signal-chip .label { font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-sec); margin-bottom: 0.4rem; }
+  .signal-chip .action { font-size: 0.85rem; font-weight: 600; color: var(--text-pri); margin-bottom: 0.3rem; }
+  .signal-chip .desc { font-size: 0.78rem; color: var(--text-sec); line-height: 1.5; }
+  .signal-chip.ignore { border-left: 3px solid var(--risk-b); }
+  .signal-chip.monitor { border-left: 3px solid var(--risk-c); }
+  .signal-chip.reduce { border-left: 3px solid var(--risk-d); }
+  .signal-chip.exit { border-left: 3px solid var(--risk-f); }
+  .signal-chip.add { border-left: 3px solid var(--risk-a); }
+  .disclosure-box { background: rgba(200, 52, 43, 0.08); border: 1px solid rgba(200, 52, 43, 0.25); border-radius: 8px; padding: 1.25rem; margin-top: 2rem; }
+  .disclosure-box p { font-size: 0.8rem; color: var(--text-sec); line-height: 1.65; }
+  footer { border-top: 0.5px solid var(--border); padding: 2.5rem 3rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; flex-wrap: wrap; margin-top: 4rem; }
+  .footer-brand p { font-size: 0.8rem; color: var(--text-sec); max-width: 260px; line-height: 1.6; margin-top: 0.5rem; }
+  .footer-links { display: flex; gap: 2.5rem; list-style: none; }
+  .footer-links a { font-size: 0.78rem; color: var(--text-sec); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--text-pri); }
+  .risk-disclaimer { width: 100%; font-size: 0.72rem; color: var(--text-sec); line-height: 1.6; border-top: 0.5px solid var(--border); padding-top: 1.25rem; margin-top: 0.5rem; }
+  @media (max-width: 600px) {
+    nav { padding: 0 1.25rem; }
+    .nav-links { display: none; }
+    footer { padding: 2rem 1.25rem; flex-direction: column; }
+    .page-wrapper { padding: 7rem 1.25rem 3rem; }
+  }
+</style>
+</head>
+<body>
+<nav>
+  <a href="/" class="nav-logo"><img src="img/logo.svg" alt="Clavix" /></a>
+  <ul class="nav-links">
+    <li><a href="/#how">How it works</a></li>
+    <li><a href="/#signals">Signals</a></li>
+    <li><a href="/#app">See the app</a></li>
+  </ul>
+  <a href="/#offer" class="nav-cta">Get early access</a>
+</nav>
+
+<div class="page-wrapper">
+  <div class="page-header">
+    <h1>Methodology</h1>
+    <p>How Clavix scores your portfolio risk and translates market events into clear actions.</p>
+    <p class="last-updated">Last updated: April 12, 2026</p>
+  </div>
+
+  <div class="methodology-section">
+    <h2>The Three Layers</h2>
+    <p>Clavix analyzes your portfolio across three interconnected layers:</p>
+    <p><strong>Macro</strong> — Broad market conditions: interest rates, inflation, GDP growth, geopolitical events, Federal Reserve policy. These factors set the overall risk tone for all portfolios.</p>
+    <p><strong>Sector</strong> — Industry and sector-level movements: earnings surprises, regulatory changes, supply chain shifts, sector rotation. These affect groups of related positions.</p>
+    <p><strong>Position</strong> — Company-specific news: earnings misses, leadership changes, product recalls, legal issues. These directly affect individual holdings.</p>
+  </div>
+
+  <div class="methodology-section">
+    <h2>Risk Scoring</h2>
+    <p>Each position receives a risk score derived from the intersection of all three layers. The score reflects the magnitude and probability of downside risk relative to your current position size and portfolio concentration.</p>
+    <p>Scores are expressed as letter grades (A through F) and signal the severity of current risk:</p>
+    <div class="signal-grid">
+      <div class="signal-chip add">
+        <div class="label">Grade A</div>
+        <div class="action">Very Low Risk</div>
+        <div class="desc">Strong macro tailwinds, sector momentum, and no company-specific concerns.</div>
+      </div>
+      <div class="signal-chip ignore">
+        <div class="label">Grade B</div>
+        <div class="action">Low Risk</div>
+        <div class="desc">Net positive conditions. No actionable concerns at this time.</div>
+      </div>
+      <div class="signal-chip monitor">
+        <div class="label">Grade C</div>
+        <div class="action">Moderate Risk</div>
+        <div class="desc">Mixed signals. Watch for developments but no urgent action needed.</div>
+      </div>
+      <div class="signal-chip reduce">
+        <div class="label">Grade D</div>
+        <div class="action">Elevated Risk</div>
+        <div class="desc">Concerns are materializing. Consider reducing exposure to limit downside.</div>
+      </div>
+      <div class="signal-chip exit">
+        <div class="label">Grade F</div>
+        <div class="action">High Risk</div>
+        <div class="desc">Risk has materialized or is imminent. Exit recommended.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="methodology-section">
+    <h2>Signal Actions</h2>
+    <p>Every risk score maps to one clear action — designed to cut through noise and tell you exactly what to do:</p>
+    <div class="signal-grid">
+      <div class="signal-chip ignore">
+        <div class="label">Ignore</div>
+        <div class="action">No action needed</div>
+        <div class="desc">No meaningful impact on your positions. Stay the course.</div>
+      </div>
+      <div class="signal-chip monitor">
+        <div class="label">Monitor</div>
+        <div class="action">Hold and watch</div>
+        <div class="desc">Situation is developing. Watch for the next signal update.</div>
+      </div>
+      <div class="signal-chip reduce">
+        <div class="label">Reduce</div>
+        <div class="action">Limit downside</div>
+        <div class="desc">Risk is elevated. Trim position size to reduce exposure.</div>
+      </div>
+      <div class="signal-chip exit">
+        <div class="label">Exit</div>
+        <div class="action">Close position</div>
+        <div class="desc">Risk has materialized. Close the position to prevent further loss.</div>
+      </div>
+      <div class="signal-chip add">
+        <div class="label">Add</div>
+        <div class="action">Increase exposure</div>
+        <div class="desc">Conditions have improved. The position has room to move higher.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="methodology-section">
+    <h2>Daily Digest</h2>
+    <p>Each morning, Clavix delivers a personalized briefing organized in three parts:</p>
+    <p><strong>Market Context</strong> — Key macro events from the prior 24 hours and what they mean for markets broadly.</p>
+    <p><strong>Where You're Exposed</strong> — How macro and sector moves connect to your specific holdings, ranked by risk severity.</p>
+    <p><strong>Clear Actions</strong> — A ranked list of positions with action recommendations and the reasoning behind each one.</p>
+  </div>
+
+  <div class="methodology-section">
+    <h2>Data Sources</h2>
+    <p>Clavix aggregates data from multiple sources:</p>
+    <p>• Brokerage API connections (read-only) for holdings data</p>
+    <p>• Licensed financial news and data feeds for market event detection</p>
+    <p>• Public market data providers for price, volume, and fundamentals</p>
+    <p>• Alternative data sources (e.g., options flow, sentiment indices) for early signal detection</p>
+  </div>
+
+  <div class="methodology-section">
+    <h2>Model Limitations</h2>
+    <p>No model is perfect. Clavix's risk analysis has known limitations:</p>
+    <p>• <strong>Lag</strong> — News events take time to propagate into scores. Real-time market moves may not be reflected immediately.</p>
+    <p>• <strong>Black swan events</strong> — Sudden, unpredictable market shocks (natural disasters, geopolitical crises) may overwhelm historical patterns the model relies on.</p>
+    <p>• <strong>Correlation assumptions</strong> — The model assumes certain securities behave similarly to their historical patterns. Unusual market regimes can break these assumptions.</p>
+    <p>• <strong>Sentiment limits</strong> — News sentiment analysis may miss sarcasm, spin, or delayed information that affects market prices.</p>
+  </div>
+
+  <div class="disclosure-box">
+    <p><strong>Important:</strong> Clavix risk scores and signal actions are generated algorithmically and are not a substitute for professional investment advice. All outputs should be treated as one input among many when making investment decisions. Past performance of signals does not guarantee future results. The methodology described here may evolve over time as the model is improved.</p>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-brand">
+    <a href="/"><img src="img/logo.svg" alt="Clavix" style="height:28px;" /></a>
+    <p>Portfolio risk intelligence for self-directed investors.</p>
+  </div>
+  <ul class="footer-links">
+    <li><a href="/privacy">Privacy</a></li>
+    <li><a href="/terms">Terms</a></li>
+    <li><a href="/refund">Refund</a></li>
+    <li><a href="/methodology">Methodology</a></li>
+    <li><a href="mailto:support@getclavix.com">Contact</a></li>
+  </ul>
+  <p class="risk-disclaimer">Clavix is for informational purposes only and does not provide investment advice. Nothing on this site or in the app constitutes a recommendation to buy, sell, or hold any security. Portfolio risk scores and signal actions are generated algorithmically and may be inaccurate, delayed, or incomplete. Always do your own research and consult a licensed financial advisor before making investment decisions.</p>
+</footer>
+</body>
+</html>
