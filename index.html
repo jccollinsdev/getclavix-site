@@ -484,9 +484,17 @@
 
  .screenshots-grid {
  display: grid;
- grid-template-columns: repeat(3, 1fr);
- gap: 1.5rem;
- margin-top: 4rem;
+ grid-template-columns: repeat(5, 1fr);
+ gap: 1rem;
+ margin-top: 3rem;
+ }
+
+ .screenshot-card img {
+ width: 100%;
+ aspect-ratio: 9/19;
+ object-fit: cover;
+ display: block;
+ border-radius: 10px;
  }
 
  .screenshots-scroll {
@@ -908,39 +916,23 @@
  <div class="screenshots-grid">
  <div class="screenshot-card">
  <img src="img/screenshots/alerts-feed.jpg" alt="Alerts" loading="lazy" />
- <div class="screenshot-label">Alerts — critical, warning, and info</div>
+ <div class="screenshot-label">Alerts</div>
  </div>
  <div class="screenshot-card">
  <img src="img/screenshots/position-detail.jpg" alt="Position detail" loading="lazy" />
- <div class="screenshot-label">Position detail — risk score &amp; chart</div>
+ <div class="screenshot-label">Position detail</div>
  </div>
  <div class="screenshot-card">
  <img src="img/screenshots/risk-dimensions.jpg" alt="Risk dimensions" loading="lazy" />
- <div class="screenshot-label">Risk dimensions — 5-factor breakdown</div>
+ <div class="screenshot-label">Risk dimensions</div>
  </div>
  <div class="screenshot-card">
  <img src="img/screenshots/digest-what-to-do.jpg" alt="Digest" loading="lazy" />
- <div class="screenshot-label">Digest — what to do next</div>
+ <div class="screenshot-label">What to do</div>
  </div>
  <div class="screenshot-card">
  <img src="img/screenshots/hood-watch.jpg" alt="Position watch" loading="lazy" />
- <div class="screenshot-label">What to watch — HOOD</div>
- </div>
- <div class="screenshot-card">
- <img src="img/screenshots/digest-overnight.jpg" alt="Overnight digest" loading="lazy" />
- <div class="screenshot-label">Overnight macro digest</div>
- </div>
- <div class="screenshot-card">
- <img src="img/screenshots/digest-sector.jpg" alt="Sector digest" loading="lazy" />
- <div class="screenshot-label">Sector overview digest</div>
- </div>
- <div class="screenshot-card">
- <img src="img/screenshots/digest-holdings.jpg" alt="Holdings digest" loading="lazy" />
- <div class="screenshot-label">Holdings risk summary</div>
- </div>
- <div class="screenshot-card">
- <img src="img/screenshots/digest-position.jpg" alt="Position impacts" loading="lazy" />
- <div class="screenshot-label">Position impacts digest</div>
+ <div class="screenshot-label">What to watch</div>
  </div>
  </div>
  <div class="screenshots-scroll">
