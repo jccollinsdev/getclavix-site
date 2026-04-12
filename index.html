@@ -7,29 +7,46 @@
 <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Epilogue:wght@300;400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
  :root {
- --ink: #0e0e0e;
- --ink-mid: #3a3a3a;
- --ink-muted: #7a7a7a;
- --ink-faint: #c8c8c8;
- --paper: #f7f5f1;
- --paper-white: #ffffff;
- --rule: #e0ddd8;
- --gold: #C4A87C;
- --font-serif: 'Libre Baskerville', Georgia, serif;
- --font-sans: 'Epilogue', sans-serif;
+ --bg-primary:   #0F1117;
+ --surface:      #161B24;
+ --surface-el:   #1E2530;
+ --border:       #2A3140;
+ --text-pri:     #E8ECF0;
+ --text-sec:     #7A8799;
+ --text-muted:   #7A8799;
+
+ --risk-a: #1D9E75;
+ --risk-b: #639922;
+ --risk-c: #BA7517;
+ --risk-d: #D85A30;
+ --risk-f: #C8342B;
+
+ --grade-ab: #E1F5EE;
+ --grade-at: #085041;
+ --grade-bb: #EAF3DE;
+ --grade-bt: #27500A;
+ --grade-cb: #FAEEDA;
+ --grade-ct: #633806;
+ --grade-db: #FAECE7;
+ --grade-dt: #712B13;
+ --grade-fb: #FCEBEB;
+ --grade-ft: #791F1F;
+
+ --font-ui:   'Inter', sans-serif;
+ --font-mono: 'JetBrains Mono', monospace;
  }
 
  html { scroll-behavior: smooth; }
 
  body {
- background: var(--paper);
- color: var(--ink);
- font-family: var(--font-sans);
+ background: var(--bg-primary);
+ color: var(--text-pri);
+ font-family: var(--font-ui);
  font-weight: 400;
  -webkit-font-smoothing: antialiased;
  overflow-x: hidden;
@@ -45,12 +62,12 @@
  justify-content: space-between;
  padding: 0 3rem;
  height: 64px;
- background: rgba(247,245,241,0.92);
+ background: rgba(15,17,23,0.92);
  backdrop-filter: blur(12px);
- border-bottom: 0.5px solid var(--rule);
+ border-bottom: 0.5px solid var(--border);
  }
 
- .nav-logo svg { display: block; height: 38px; width: auto; }
+ .nav-logo img { display: block; height: 36px; width: auto; }
 
  .nav-links {
  display: flex;
@@ -62,12 +79,12 @@
  font-size: 0.78rem;
  letter-spacing: 0.08em;
  text-transform: uppercase;
- color: var(--ink-mid);
+ color: var(--text-sec);
  text-decoration: none;
  transition: color 0.2s;
  }
 
- .nav-links a:hover { color: var(--ink); }
+ .nav-links a:hover { color: var(--text-pri); }
 
  .nav-cta {
  display: inline-block;
@@ -75,13 +92,33 @@
  letter-spacing: 0.06em;
  text-transform: uppercase;
  padding: 9px 22px;
- border: 1px solid var(--ink);
- color: var(--ink);
+ border: 1px solid var(--border);
+ color: var(--text-pri);
  text-decoration: none;
- transition: background 0.2s, color 0.2s;
+ transition: background 0.2s, border-color 0.2s;
  }
 
- .nav-cta:hover { background: var(--ink); color: var(--paper); }
+ .nav-cta:hover { background: var(--surface-el); border-color: var(--text-sec); }
+
+ .nav-hamburger {
+ display: none;
+ flex-direction: column;
+ gap: 5px;
+ cursor: pointer;
+ padding: 8px;
+ background: none;
+ border: none;
+ }
+
+ .nav-hamburger span {
+ display: block;
+ width: 22px;
+ height: 1.5px;
+ background: var(--text-pri);
+ transition: opacity 0.2s, transform 0.2s;
+ }
+
+ .nav-links.open { display: flex; flex-direction: column; gap: 1.5rem; padding: 1.5rem 1.5rem 1.5rem 0; }
 
  /* ── HERO ── */
  .hero {
@@ -97,15 +134,15 @@
  flex-direction: column;
  justify-content: center;
  padding: 6rem 4rem 6rem 4rem;
- border-right: 0.5px solid var(--rule);
+ border-right: 0.5px solid var(--border);
  }
 
  .hero-kicker {
- font-family: var(--font-sans);
+ font-family: var(--font-ui);
  font-size: 0.7rem;
  letter-spacing: 0.16em;
  text-transform: uppercase;
- color: var(--ink-muted);
+ color: var(--text-sec);
  margin-bottom: 2rem;
  display: flex;
  align-items: center;
@@ -116,29 +153,29 @@
  content: '';
  width: 32px;
  height: 1px;
- background: var(--ink-muted);
+ background: var(--text-sec);
  display: block;
  }
 
  .hero-headline {
- font-family: var(--font-serif);
- font-size: clamp(2.6rem, 4vw, 3.8rem);
+ font-family: var(--font-ui);
+ font-size: clamp(2.4rem, 4vw, 3.6rem);
  font-weight: 400;
  line-height: 1.12;
  letter-spacing: -0.02em;
  margin-bottom: 2rem;
- color: var(--ink);
+ color: var(--text-pri);
  }
 
  .hero-headline em {
  font-style: italic;
- color: var(--ink-mid);
+ color: var(--text-sec);
  }
 
  .hero-body {
  font-size: 1rem;
  line-height: 1.78;
- color: var(--ink-mid);
+ color: var(--text-sec);
  max-width: 440px;
  margin-bottom: 3rem;
  font-weight: 300;
@@ -158,50 +195,58 @@
 
  .hero-input {
  flex: 1;
- height: 50px;
- border: 1px solid var(--ink);
+ height: 48px;
+ border: 1px solid var(--border);
  border-right: none;
- background: transparent;
+ background: var(--surface);
  padding: 0 1.2rem;
- font-family: var(--font-sans);
- font-size: 0.88rem;
- color: var(--ink);
+ font-family: var(--font-ui);
+ font-size: 1rem;
+ color: var(--text-pri);
  outline: none;
+ -webkit-appearance: none;
+ border-radius: 0;
+ box-sizing: border-box;
+ display: flex;
+ align-items: center;
  }
 
- .hero-input::placeholder { color: var(--ink-faint); }
- .hero-input:focus { border-color: var(--ink); background: var(--paper-white); }
+ .hero-input::placeholder { color: var(--text-sec); }
+ .hero-input:focus { border-color: var(--text-sec); background: var(--surface-el); }
 
  .hero-btn {
- height: 50px;
+ height: 48px;
  padding: 0 1.8rem;
- background: var(--ink);
- color: var(--paper);
- border: 1px solid var(--ink);
- font-family: var(--font-sans);
- font-size: 0.78rem;
+ background: var(--surface-el);
+ color: var(--text-pri);
+ border: 1px solid var(--border);
+ font-family: var(--font-ui);
+ font-size: 0.8rem;
  letter-spacing: 0.1em;
  text-transform: uppercase;
  cursor: pointer;
  white-space: nowrap;
- transition: opacity 0.18s;
+ transition: background 0.18s, border-color 0.18s;
+ display: flex;
+ align-items: center;
+ justify-content: center;
  }
 
- .hero-btn:hover { opacity: 0.82; }
+ .hero-btn:hover { background: var(--border); border-color: var(--text-sec); }
 
  .hero-smallprint {
  font-size: 0.72rem;
- color: var(--ink-muted);
+ color: var(--text-sec);
  letter-spacing: 0.04em;
  }
 
- /* hero right — signal panel */
+ /* hero right — dark signal panel */
  .hero-right {
  display: flex;
  align-items: center;
  justify-content: center;
  padding: 6rem 4rem;
- background: var(--paper-white);
+ background: var(--surface);
  position: relative;
  }
 
@@ -216,20 +261,21 @@
  align-items: center;
  margin-bottom: 2rem;
  padding-bottom: 1rem;
- border-bottom: 0.5px solid var(--rule);
+ border-bottom: 0.5px solid var(--border);
  }
 
  .signal-label {
  font-size: 0.68rem;
  letter-spacing: 0.14em;
  text-transform: uppercase;
- color: var(--ink-muted);
+ color: var(--text-sec);
  }
 
  .signal-date {
  font-size: 0.68rem;
  letter-spacing: 0.06em;
- color: var(--ink-faint);
+ color: var(--text-sec);
+ opacity: 0.6;
  }
 
  .score-block {
@@ -240,27 +286,27 @@
  }
 
  .score-num {
- font-family: var(--font-serif);
+ font-family: var(--font-mono);
  font-size: 5rem;
  font-weight: 400;
  line-height: 1;
  letter-spacing: -0.04em;
- color: var(--ink);
+ color: var(--text-pri);
  }
 
  .score-delta {
+ font-family: var(--font-mono);
  font-size: 0.82rem;
- color: #c0392b;
+ color: var(--risk-d);
  letter-spacing: 0.04em;
  }
 
  .score-interp {
  font-size: 0.88rem;
- color: var(--ink-mid);
+ color: var(--text-sec);
  line-height: 1.6;
  margin-bottom: 2rem;
  font-style: italic;
- font-family: var(--font-serif);
  }
 
  .holdings-list {
@@ -276,53 +322,63 @@
  gap: 1rem;
  align-items: center;
  padding: 0.65rem 0;
- border-bottom: 0.5px solid var(--rule);
+ border-bottom: 0.5px solid var(--border);
  font-size: 0.8rem;
  }
 
  .holding-ticker {
+ font-family: var(--font-ui);
  font-weight: 500;
  letter-spacing: 0.06em;
  font-size: 0.75rem;
  text-transform: uppercase;
+ color: var(--text-pri);
  }
 
  .holding-grade {
+ font-family: var(--font-mono);
  font-size: 0.7rem;
  font-weight: 500;
  letter-spacing: 0.06em;
  padding: 2px 7px;
- border: 0.5px solid var(--ink-faint);
- color: var(--ink-mid);
+ border: 0.5px solid var(--border);
  }
 
- .holding-trend-up { color: #27ae60; font-size: 0.75rem; }
- .holding-trend-down { color: #c0392b; font-size: 0.75rem; }
- .holding-trend-flat { color: var(--ink-muted); font-size: 0.75rem; }
+ .grade-a { background: var(--grade-ab); color: var(--grade-at); border-color: transparent; }
+ .grade-b { background: var(--grade-bb); color: var(--grade-bt); border-color: transparent; }
+ .grade-c { background: var(--grade-cb); color: var(--grade-ct); border-color: transparent; }
+ .grade-d { background: var(--grade-db); color: var(--grade-dt); border-color: transparent; }
+ .grade-f { background: var(--grade-fb); color: var(--grade-ft); border-color: transparent; }
+
+ .holding-trend-up   { color: var(--risk-a); font-family: var(--font-mono); font-size: 0.75rem; }
+ .holding-trend-down { color: var(--risk-f); font-family: var(--font-mono); font-size: 0.75rem; }
+ .holding-trend-flat { color: var(--text-sec); font-family: var(--font-mono); font-size: 0.75rem; }
 
  .holding-action {
+ font-family: var(--font-ui);
  font-size: 0.65rem;
  letter-spacing: 0.1em;
  text-transform: uppercase;
+ font-weight: 500;
  }
 
- .action-exit { color: #c0392b; font-weight: 500; }
- .action-monitor { color: #d68910; font-weight: 500; }
- .action-add { color: #27ae60; font-weight: 500; }
- .action-ignore { color: var(--ink-muted); }
- .action-reduce { color: #e67e22; font-weight: 500; }
+ .action-exit    { color: var(--risk-f); }
+ .action-monitor { color: var(--risk-c); }
+ .action-add     { color: var(--risk-a); }
+ .action-ignore  { color: var(--text-sec); }
+ .action-reduce  { color: var(--risk-d); }
 
  /* ── SECTION SHARED ── */
  section {
  padding: 7rem 4rem;
- border-top: 0.5px solid var(--rule);
+ border-top: 0.5px solid var(--border);
  }
 
  .section-tag {
  font-size: 0.68rem;
  letter-spacing: 0.16em;
  text-transform: uppercase;
- color: var(--ink-muted);
+ color: var(--text-sec);
  margin-bottom: 1.5rem;
  display: flex;
  align-items: center;
@@ -332,17 +388,17 @@
  .section-tag::before {
  content: '';
  width: 24px; height: 1px;
- background: var(--ink-muted);
+ background: var(--text-sec);
  display: block;
  }
 
  .section-headline {
- font-family: var(--font-serif);
  font-size: clamp(1.8rem, 3vw, 2.6rem);
  font-weight: 400;
  line-height: 1.2;
  letter-spacing: -0.02em;
  margin-bottom: 1.5rem;
+ color: var(--text-pri);
  }
 
  /* ── HOW IT WORKS ── */
@@ -351,37 +407,38 @@
  grid-template-columns: repeat(3, 1fr);
  gap: 0;
  margin-top: 4rem;
- border: 0.5px solid var(--rule);
+ border: 0.5px solid var(--border);
  }
 
  .how-cell {
  padding: 2.5rem 2rem;
- border-right: 0.5px solid var(--rule);
+ border-right: 0.5px solid var(--border);
+ background: var(--surface);
  position: relative;
  }
 
  .how-cell:last-child { border-right: none; }
 
  .how-num {
- font-family: var(--font-serif);
+ font-family: var(--font-mono);
  font-size: 3rem;
- color: var(--ink-faint);
+ color: var(--border);
  line-height: 1;
  margin-bottom: 1.5rem;
  font-weight: 400;
  }
 
  .how-title {
- font-family: var(--font-serif);
  font-size: 1.15rem;
  font-weight: 400;
  margin-bottom: 0.75rem;
  line-height: 1.3;
+ color: var(--text-pri);
  }
 
  .how-desc {
  font-size: 0.85rem;
- color: var(--ink-mid);
+ color: var(--text-sec);
  line-height: 1.75;
  font-weight: 300;
  }
@@ -392,20 +449,21 @@
  grid-template-columns: 1fr 1fr;
  gap: 0;
  padding: 0;
- border-top: 0.5px solid var(--rule);
+ border-top: 0.5px solid var(--border);
  }
 
  .signals-left {
  padding: 7rem 4rem;
- border-right: 0.5px solid var(--rule);
+ border-right: 0.5px solid var(--border);
  display: flex;
  flex-direction: column;
  justify-content: center;
+ background: var(--bg-primary);
  }
 
  .signals-right {
  padding: 7rem 4rem;
- background: var(--paper-white);
+ background: var(--surface);
  display: flex;
  flex-direction: column;
  justify-content: center;
@@ -423,52 +481,53 @@
  align-items: center;
  gap: 1.2rem;
  padding: 1.1rem 1.4rem;
- border: 0.5px solid var(--rule);
- background: var(--paper-white);
+ border: 0.5px solid var(--border);
+ background: var(--surface-el);
  transition: border-color 0.2s;
  }
 
- .signal-chip:hover { border-color: var(--ink); }
+ .signal-chip:hover { border-color: var(--text-sec); }
 
  .chip-action {
  font-size: 0.65rem;
  letter-spacing: 0.12em;
  text-transform: uppercase;
  font-weight: 500;
- min-width: 52px;
+ min-width: 60px;
+ font-family: var(--font-ui);
  }
 
  .chip-divider {
  width: 0.5px;
  height: 28px;
- background: var(--rule);
+ background: var(--border);
  flex-shrink: 0;
  }
 
  .chip-text {
  font-size: 0.82rem;
- color: var(--ink-mid);
+ color: var(--text-sec);
  line-height: 1.5;
  font-weight: 300;
  }
 
- .chip-ignore .chip-action { color: var(--ink-muted); }
- .chip-monitor .chip-action { color: #d68910; }
- .chip-reduce .chip-action { color: #e67e22; }
- .chip-exit .chip-action { color: #c0392b; }
- .chip-add .chip-action { color: #27ae60; }
+ .chip-ignore .chip-action { color: var(--text-sec); }
+ .chip-monitor .chip-action { color: var(--risk-c); }
+ .chip-reduce .chip-action { color: var(--risk-d); }
+ .chip-exit   .chip-action { color: var(--risk-f); }
+ .chip-add    .chip-action { color: var(--risk-a); }
 
  .signals-body {
  font-size: 0.95rem;
  line-height: 1.8;
- color: var(--ink-mid);
+ color: var(--text-sec);
  font-weight: 300;
  max-width: 420px;
  }
 
  /* ── DIGEST ── */
- .digest-section {
- background: var(--paper-white);
+ section#digest {
+ background: var(--surface);
  }
 
  .digest-levels {
@@ -486,27 +545,28 @@
  font-size: 0.65rem;
  letter-spacing: 0.14em;
  text-transform: uppercase;
- color: var(--ink-muted);
+ color: var(--text-sec);
  margin-bottom: 1.2rem;
  padding-bottom: 1rem;
- border-bottom: 0.5px solid var(--rule);
+ border-bottom: 0.5px solid var(--border);
  display: flex;
  align-items: center;
  justify-content: space-between;
  }
 
  .digest-level-n {
- font-family: var(--font-serif);
+ font-family: var(--font-mono);
  font-size: 0.65rem;
- color: var(--ink-faint);
+ color: var(--text-sec);
+ opacity: 0.5;
  }
 
  .digest-item {
  font-size: 0.83rem;
- color: var(--ink-mid);
+ color: var(--text-sec);
  line-height: 1.65;
  padding: 0.8rem 0;
- border-bottom: 0.5px solid var(--rule);
+ border-bottom: 0.5px solid var(--border);
  font-weight: 300;
  }
 
@@ -516,17 +576,17 @@
  .offer-section {
  text-align: center;
  padding: 9rem 4rem;
- background: var(--ink);
- border-top: none;
+ background: var(--surface-el);
+ border-top: 0.5px solid var(--border);
  }
 
- .offer-section .section-tag { color: #666; justify-content: center; }
- .offer-section .section-tag::before { background: #666; }
- .offer-section .section-headline { color: var(--paper); }
+ .offer-section .section-tag { color: var(--text-sec); justify-content: center; }
+ .offer-section .section-tag::before { background: var(--text-sec); }
+ .offer-section .section-headline { color: var(--text-pri); }
 
  .offer-body {
  font-size: 1rem;
- color: #999;
+ color: var(--text-sec);
  line-height: 1.8;
  max-width: 500px;
  margin: 0 auto 3rem;
@@ -544,26 +604,28 @@
  .offer-input {
  flex: 1;
  height: 52px;
- background: transparent;
- border: 1px solid #444;
+ background: var(--surface);
+ border: 1px solid var(--border);
  border-right: none;
  padding: 0 1.4rem;
- font-family: var(--font-sans);
+ font-family: var(--font-ui);
  font-size: 0.88rem;
- color: var(--paper);
+ color: var(--text-pri);
  outline: none;
+ -webkit-appearance: none;
+ border-radius: 0;
  }
 
- .offer-input::placeholder { color: #555; }
- .offer-input:focus { border-color: #888; background: rgba(255,255,255,0.04); }
+ .offer-input::placeholder { color: var(--text-sec); }
+ .offer-input:focus { border-color: var(--text-sec); background: var(--bg-primary); }
 
  .offer-btn {
  height: 52px;
  padding: 0 2rem;
- background: var(--paper);
- color: var(--ink);
- border: 1px solid var(--paper);
- font-family: var(--font-sans);
+ background: var(--text-pri);
+ color: var(--bg-primary);
+ border: 1px solid var(--text-pri);
+ font-family: var(--font-ui);
  font-size: 0.78rem;
  letter-spacing: 0.1em;
  text-transform: uppercase;
@@ -576,15 +638,15 @@
 
  .offer-smallprint {
  font-size: 0.72rem;
- color: #555;
+ color: var(--text-sec);
  letter-spacing: 0.04em;
  }
 
  /* ── FOOTER ── */
  footer {
  padding: 2.5rem 4rem;
- border-top: 0.5px solid #222;
- background: var(--ink);
+ border-top: 0.5px solid var(--border);
+ background: var(--bg-primary);
  display: flex;
  justify-content: space-between;
  align-items: center;
@@ -594,7 +656,7 @@
 
  .footer-copy {
  font-size: 0.72rem;
- color: #555;
+ color: var(--text-sec);
  letter-spacing: 0.04em;
  }
 
@@ -606,13 +668,13 @@
 
  .footer-links a {
  font-size: 0.72rem;
- color: #555;
+ color: var(--text-sec);
  text-decoration: none;
  letter-spacing: 0.04em;
  transition: color 0.2s;
  }
 
- .footer-links a:hover { color: #999; }
+ .footer-links a:hover { color: var(--text-pri); }
 
  /* ── ANIMATIONS ── */
  .fade-in {
@@ -635,28 +697,94 @@
  @media (max-width: 900px) {
  nav { padding: 0 1.5rem; }
  .nav-links { display: none; }
+ .nav-hamburger { display: flex; }
 
  .hero { grid-template-columns: 1fr; }
  .hero-right { display: none; }
- .hero-left { padding: 4rem 2rem 5rem; border-right: none; }
+ .hero-left { padding: 4rem 1.5rem 5rem; border-right: none; }
 
- section { padding: 5rem 2rem; }
+ .hero-headline { font-size: 2.2rem; }
+ .hero-body { font-size: 0.92rem; }
+ .hero-form { max-width: 100%; }
+ .hero-form-row { flex-direction: column; align-items: stretch; }
+ .hero-input { border-right: 1px solid var(--border); height: 52px; width: 100%; font-size: 1rem; }
+ .hero-btn { height: 52px; width: 100%; }
+
+ section { padding: 5rem 1.5rem; }
 
  .how-grid { grid-template-columns: 1fr; }
- .how-cell { border-right: none; border-bottom: 0.5px solid var(--rule); }
+ .how-cell { border-right: none; border-bottom: 0.5px solid var(--border); padding: 2rem 1.5rem; }
  .how-cell:last-child { border-bottom: none; }
+ .how-num { font-size: 2.4rem; }
+ .how-title { font-size: 1.05rem; }
 
  .signals-section { grid-template-columns: 1fr; }
- .signals-left { padding: 5rem 2rem; border-right: none; }
- .signals-right { padding: 5rem 2rem; }
+ .signals-left { padding: 4rem 1.5rem; border-right: none; }
+ .signals-right { padding: 4rem 1.5rem; }
+ .signal-chips { gap: 10px; }
 
  .digest-levels { grid-template-columns: 1fr; gap: 3rem; }
 
- .offer-section { padding: 6rem 2rem; }
- .offer-form { flex-direction: column; max-width: 340px; }
- .offer-input { border-right: 1px solid #444; }
+ .offer-section { padding: 6rem 1.5rem; }
+ .offer-form { flex-direction: column; max-width: 340px; align-items: stretch; }
+ .offer-input { border-right: 1px solid var(--border); width: 100%; font-size: 16px; }
 
  footer { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; gap: 1rem; }
+
+ .section-headline { font-size: 1.8rem; }
+ }
+
+ @media (max-width: 600px) {
+ nav { height: 56px; }
+ .nav-logo img { height: 30px; }
+
+ .hero { min-height: auto; }
+ .hero-left { padding: 5rem 1.25rem 4rem; }
+ .hero-kicker { font-size: 0.65rem; }
+ .hero-headline { font-size: 1.9rem; letter-spacing: -0.01em; }
+ .hero-body { font-size: 0.88rem; line-height: 1.7; }
+ .hero-form { gap: 10px; }
+ .hero-input { height: 50px; min-height: 50px; font-size: 16px; padding: 0 1rem; -webkit-appearance: none; border-radius: 0; }
+ .hero-btn { height: 50px; min-height: 50px; font-size: 0.8rem; }
+ .hero-smallprint { font-size: 0.68rem; }
+
+ section { padding: 4rem 1.25rem; }
+ .section-tag { font-size: 0.62rem; }
+ .section-headline { font-size: 1.6rem; }
+
+ .how-cell { padding: 1.5rem 1.25rem; }
+ .how-num { font-size: 2rem; }
+ .how-title { font-size: 1rem; }
+ .how-desc { font-size: 0.82rem; }
+
+ .signals-left { padding: 3.5rem 1.25rem; }
+ .signals-right { padding: 3.5rem 1.25rem; }
+ .signals-body { font-size: 0.88rem; }
+ .chip-text { font-size: 0.78rem; }
+ .chip-action { min-width: 44px; font-size: 0.62rem; }
+
+ .digest-levels { gap: 2.5rem; }
+ .digest-item { font-size: 0.8rem; }
+
+ .offer-section { padding: 5rem 1.25rem; }
+ .offer-body { font-size: 0.88rem; }
+ .offer-form { max-width: 100%; }
+ .offer-input { height: 50px; min-height: 50px; font-size: 16px; padding: 0 1rem; -webkit-appearance: none; border-radius: 0; }
+ .offer-btn { height: 50px; font-size: 0.8rem; }
+
+ footer { padding: 1.5rem 1.25rem; }
+ .footer-links { gap: 1.5rem; }
+
+ .score-num { font-size: 3.8rem; }
+ .holding-row { font-size: 0.75rem; padding: 0.55rem 0; }
+ .holding-ticker { font-size: 0.68rem; }
+ .holding-grade { font-size: 0.62rem; padding: 2px 5px; }
+ }
+
+ @media (max-width: 380px) {
+ .hero-headline { font-size: 1.65rem; }
+ .hero-body { font-size: 0.84rem; }
+ .offer-form { max-width: 280px; }
  }
 
  /* success state */
@@ -664,7 +792,7 @@
  display: none;
  font-size: 0.82rem;
  letter-spacing: 0.06em;
- color: #27ae60;
+ color: var(--risk-a);
  margin-top: 0.75rem;
  }
 </style>
@@ -674,12 +802,14 @@
 <!-- NAV -->
 <nav>
  <a href="#" class="nav-logo" aria-label="Clavix home">
- <img src="img/logo.svg" alt="Clavix" style="height:42px;width:auto;display:block;">
+ <img src="img/logo.png" alt="Clavix" style="height:36px;width:auto;display:block;">
  </a>
+ <button class="nav-hamburger" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+ <span></span><span></span><span></span>
+ </button>
  <ul class="nav-links">
- <li><a href="#how">How it works</a></li>
- <li><a href="#signals">Signals</a></li>
- <li><a href="#digest">Digest</a></li>
+ <li><a href="#how" onclick="document.querySelector('.nav-links').classList.remove('open')">How it works</a></li>
+ <li><a href="#signals" onclick="document.querySelector('.nav-links').classList.remove('open')">Signals</a></li>
  </ul>
  <a href="#offer" class="nav-cta">Get early access</a>
 </nav>
@@ -687,22 +817,21 @@
 <!-- HERO -->
 <section class="hero" style="border-top: none; padding: 0;">
  <div class="hero-left">
- <div class="hero-kicker fade-in">Portfolio intelligence</div>
+ <div class="hero-kicker fade-in">For Self-Directed Investors</div>
  <h1 class="hero-headline fade-in">
- Your portfolio.<br>
- <em>Understood.</em><br>
- Protected.
+ Know where your portfolio<br>stands
  </h1>
  <p class="hero-body fade-in">
- Clavix reads market events, weighs them against your exact holdings, and tells you exactly where your risk is — and when the tide is turning against you before it hurts.
+ Clavix tracks your holdings, analyzes market-moving news, and scores downside risk — so you always know what matters and what needs attention.
  </p>
  <div class="hero-form fade-in">
  <div class="hero-form-row">
  <input class="hero-input" type="email" id="hero-email" placeholder="your@email.com" />
- <button class="hero-btn" onclick="signup('hero-email','hero-success')">Start free →</button>
+ <button class="hero-btn" onclick="signup('hero-email','hero-success')">Get early access</button>
  </div>
  <div class="success-msg" id="hero-success">You're on the list. First month is on us.</div>
- <p class="hero-smallprint">First month free · No credit card · Cancel anytime</p>
+ <p class="hero-smallprint">First month free &middot; No credit card &middot; Cancel anytime</p>
+ <p class="hero-counter" id="hero-counter">Join <span id="waitlist-count">101</span>+ investors on the waitlist</p>
  </div>
  </div>
 
@@ -715,39 +844,39 @@
 
  <div class="score-block">
  <span class="score-num">64</span>
- <span class="score-delta">↓ 7 pts</span>
+ <span class="score-delta">&#8595; 7 pts</span>
  </div>
- <p class="score-interp">"Elevated risk. Two positions exposed to Fed guidance; one requires action today."</p>
+ <p class="score-interp">&ldquo;Elevated risk. Two positions exposed to macro headwinds; one requires action today.&rdquo;</p>
 
  <div class="holdings-list">
  <div class="holding-row">
  <span class="holding-ticker">NVDA</span>
- <span class="holding-grade">B+</span>
- <span class="holding-trend-up">↑</span>
+ <span class="holding-grade grade-b">B+</span>
+ <span class="holding-trend-up">&#8593;</span>
  <span class="holding-action action-monitor">Monitor</span>
  </div>
  <div class="holding-row">
  <span class="holding-ticker">SIVB</span>
- <span class="holding-grade">D</span>
- <span class="holding-trend-down">↓↓</span>
+ <span class="holding-grade grade-d">D</span>
+ <span class="holding-trend-down">&#8595;&#8595;</span>
  <span class="holding-action action-exit">Exit</span>
  </div>
  <div class="holding-row">
  <span class="holding-ticker">AAPL</span>
- <span class="holding-grade">A−</span>
- <span class="holding-trend-flat">→</span>
+ <span class="holding-grade grade-a">A&minus;</span>
+ <span class="holding-trend-flat">&#8594;</span>
  <span class="holding-action action-ignore">Ignore</span>
  </div>
  <div class="holding-row">
  <span class="holding-ticker">TLT</span>
- <span class="holding-grade">C+</span>
- <span class="holding-trend-down">↓</span>
+ <span class="holding-grade grade-c">C+</span>
+ <span class="holding-trend-down">&#8595;</span>
  <span class="holding-action action-reduce">Reduce</span>
  </div>
  <div class="holding-row">
  <span class="holding-ticker">GLD</span>
- <span class="holding-grade">A</span>
- <span class="holding-trend-up">↑</span>
+ <span class="holding-grade grade-a">A</span>
+ <span class="holding-trend-up">&#8593;</span>
  <span class="holding-action action-add">Add</span>
  </div>
  </div>
@@ -757,24 +886,24 @@
 
 <!-- HOW IT WORKS -->
 <section id="how">
- <div class="section-tag">How it works</div>
- <h2 class="section-headline">From market noise<br>to clear instruction</h2>
+ <div class="section-tag">How Clavix Works</div>
+ <h2 class="section-headline">From holdings to a daily<br>risk briefing in minutes</h2>
 
  <div class="how-grid">
  <div class="how-cell">
  <div class="how-num">01</div>
- <h3 class="how-title">Connect your portfolio</h3>
- <p class="how-desc">Add your holdings in under a minute. Clavix reads your positions — not your brokerage credentials — and sets your personal risk baseline.</p>
+ <h3 class="how-title">Add or Connect Your Portfolio</h3>
+ <p class="how-desc">Enter your holdings in seconds or connect your brokerage for automatic sync. Clavix builds a live view of your portfolio instantly.</p>
  </div>
  <div class="how-cell">
  <div class="how-num">02</div>
- <h3 class="how-title">Clavix reads the world</h3>
- <p class="how-desc">Every morning, Clavix processes macro events, sector shifts, and company-level news. It filters everything through the lens of what you actually hold.</p>
+ <h3 class="how-title">Clavix Tracks What Matters</h3>
+ <p class="how-desc">Clavix continuously monitors macro, sector, and company news, filtering everything through your portfolio so only relevant events surface.</p>
  </div>
  <div class="how-cell">
  <div class="how-num">03</div>
- <h3 class="how-title">You see your risk clearly</h3>
- <p class="how-desc">Not a report. Not a feed. A clear view of where you're exposed and what requires action — ignore, monitor, reduce, or exit.</p>
+ <h3 class="how-title">Your Portfolio&rsquo;s Risk, Scored and Explained</h3>
+ <p class="how-desc">Clavix analyzes each position and assigns a clear downside risk score, explaining what changed, why it matters, and how it affects your portfolio.</p>
  </div>
  </div>
 </section>
@@ -783,9 +912,9 @@
 <div class="signals-section" id="signals">
  <div class="signals-left">
  <div class="section-tag">The action system</div>
- <h2 class="section-headline">Your risk,<br>resolved into action</h2>
+ <h2 class="section-headline">Clear actions.<br>No noise.</h2>
  <p class="signals-body">
- Every market event is filtered through your exact holdings. What threatens you, what doesn't, and what to do about it — no ambiguity, no noise.
+ Every market event is filtered through your portfolio and translated into one clear action. What matters, what doesn't, and what to do next.
  </p>
  </div>
 
@@ -794,66 +923,52 @@
  <div class="signal-chip chip-ignore">
  <span class="chip-action">Ignore</span>
  <div class="chip-divider"></div>
- <span class="chip-text">This event does not meaningfully affect your positions. No action required.</span>
+ <span class="chip-text">No meaningful impact on your positions. No action needed.</span>
  </div>
  <div class="signal-chip chip-monitor">
  <span class="chip-action">Monitor</span>
  <div class="chip-divider"></div>
- <span class="chip-text">Developing situation. Hold your position but watch for the next signal.</span>
+ <span class="chip-text">Situation is developing. Hold your position and watch for the next signal.</span>
  </div>
  <div class="signal-chip chip-reduce">
  <span class="chip-action">Reduce</span>
  <div class="chip-divider"></div>
- <span class="chip-text">Risk is elevated. Reduce exposure to lower your downside.</span>
+ <span class="chip-text">Risk is elevated. Reduce exposure to limit downside.</span>
  </div>
  <div class="signal-chip chip-exit">
  <span class="chip-action">Exit</span>
  <div class="chip-divider"></div>
- <span class="chip-text">Risk has materialized. Exit the position cleanly.</span>
+ <span class="chip-text">Risk has materialized. Exit the position.</span>
  </div>
  <div class="signal-chip chip-add">
  <span class="chip-action">Add</span>
  <div class="chip-divider"></div>
- <span class="chip-text">Conditions have improved. The position has room to grow from here.</span>
+ <span class="chip-text">Conditions have improved. The position has room to move higher.</span>
  </div>
  </div>
  </div>
 </div>
 
 <!-- DIGEST -->
-<section id="digest" class="digest-section">
+<section id="digest">
  <div class="section-tag">Daily digest</div>
- <h2 class="section-headline">Macro → Sector → You</h2>
+ <h2 class="section-headline">What changed. What it means.<br>What to do.</h2>
 
- <div class="digest-levels">
- <div class="digest-level">
- <div class="digest-level-tag">
- <span>Macro</span>
- <span class="digest-level-n">Global</span>
+ <div class="how-grid">
+ <div class="how-cell">
+ <div class="how-num">01</div>
+ <h3 class="how-title">Market Context</h3>
+ <p class="how-desc">Clavix summarizes the key macro events shaping the market, highlighting what could impact your portfolio before you even look at positions.</p>
  </div>
- <div class="digest-item">Fed holds rates; language signals one cut in H2. Bond-sensitive positions face continued duration pressure.</div>
- <div class="digest-item">China PMI contracts for third straight month. Export-linked industrials under watch.</div>
- <div class="digest-item">Dollar index up 0.4%. Commodity positions facing modest FX headwind.</div>
+ <div class="how-cell">
+ <div class="how-num">02</div>
+ <h3 class="how-title">Where You&rsquo;re Exposed</h3>
+ <p class="how-desc">Clavix connects market and sector shifts directly to your holdings, showing exactly where your portfolio is most at risk.</p>
  </div>
-
- <div class="digest-level">
- <div class="digest-level-tag">
- <span>Sector</span>
- <span class="digest-level-n">Your exposure</span>
- </div>
- <div class="digest-item">Semiconductor demand outlook revised down by two analysts. Affects your NVDA position — confidence holding.</div>
- <div class="digest-item">Regional banking stress indicators rising. Direct relevance to one of your holdings.</div>
- <div class="digest-item">Gold as safe-haven inflows accelerating this week. GLD position risk-adjusted upside increasing.</div>
- </div>
-
- <div class="digest-level">
- <div class="digest-level-tag">
- <span>What to do</span>
- <span class="digest-level-n">Today</span>
- </div>
- <div class="digest-item">Exit SIVB. Risk confirmed by today's sector data. Do not wait for further guidance.</div>
- <div class="digest-item">Add to GLD. Macro and sector conditions both align. Confidence: high.</div>
- <div class="digest-item">Reduce TLT. Rate path uncertainty outweighs the original duration play.</div>
+ <div class="how-cell">
+ <div class="how-num">03</div>
+ <h3 class="how-title">Clear Actions</h3>
+ <p class="how-desc">Each position is translated into a clear action &mdash; ignore, monitor, reduce, exit, or add &mdash; so you know exactly what to do next.</p>
  </div>
  </div>
 </section>
@@ -861,21 +976,22 @@
 <!-- OFFER CTA -->
 <section id="offer" class="offer-section">
  <div class="section-tag">Early access</div>
- <h2 class="section-headline" style="color: #f7f5f1;">Your first month is free.<br>No commitment required.</h2>
- <p class="offer-body">Drop your email and we'll reserve your place. When Clavix opens, you get 30 days to see exactly how much risk you're carrying — and when to move before it matters.</p>
+ <h2 class="section-headline">Your first month is free.<br>No commitment required.</h2>
+ <p class="offer-body">Get early access to Clavix and finally see how much risk you&rsquo;re taking on, and when you should actually do something about it.</p>
 
  <div class="offer-form">
  <input class="offer-input" type="email" id="offer-email" placeholder="your@email.com" />
  <button class="offer-btn" onclick="signup('offer-email','offer-success')">Reserve my spot</button>
  </div>
- <div class="success-msg" id="offer-success" style="justify-content: center; color: #6bcb8b; margin: 0.75rem auto 0;">Your spot is reserved. We'll be in touch.</div>
- <p class="offer-smallprint">No credit card · Cancel anytime · Your data is never sold</p>
+ <div class="success-msg" id="offer-success" style="justify-content: center; color: var(--risk-a); margin: 0.75rem auto 0;">Your spot is reserved. We&rsquo;ll be in touch.</div>
+ <p class="offer-smallprint" style="margin-top: 1rem;">No credit card &middot; Cancel anytime &middot; Your data is never sold</p>
+ <p class="offer-counter" id="offer-counter">Join <span id="offer-waitlist-count">127</span>+ investors on the waitlist</p>
 </section>
 
 <!-- FOOTER -->
 <footer>
- <img src="img/logo.svg" alt="Clavix" style="height:30px;width:auto;">
- <span class="footer-copy">© 2026 Clavix. All rights reserved.</span>
+ <img src="img/logo.png" alt="Clavix" style="height:28px;width:auto;filter:brightness(0) invert(1);opacity:0.6;">
+ <span class="footer-copy">&copy; 2026 Clavix. All rights reserved.</span>
  <ul class="footer-links">
  <li><a href="#">Privacy</a></li>
  <li><a href="#">Terms</a></li>
@@ -924,6 +1040,10 @@
  input.style.display = 'none';
  if (btn && btn.tagName === 'BUTTON') btn.style.display = 'none';
  msg.style.display = 'block';
+ const countEl = document.getElementById('waitlist-count');
+ const offerCountEl = document.getElementById('offer-waitlist-count');
+ if (countEl) { var c = parseInt(countEl.textContent) + 1; countEl.textContent = c; }
+ if (offerCountEl) { var oc = parseInt(offerCountEl.textContent) + 1; offerCountEl.textContent = oc; }
  } catch (e) {
  input.style.borderColor = '#c0392b';
  input.disabled = false;
@@ -945,7 +1065,7 @@
  });
  }, { threshold: 0.15 });
 
- document.querySelectorAll('.how-cell, .digest-level, .signal-chip').forEach(el => {
+ document.querySelectorAll('.how-cell, .signal-chip').forEach(el => {
  el.style.opacity = '0';
  el.style.transform = 'translateY(16px)';
  observer.observe(el);
