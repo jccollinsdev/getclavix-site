@@ -1,0 +1,46 @@
+# Clavix — Site Summary for AI Crawlers
+
+## URL
+https://getclavix.com
+
+## Description
+Clavix is a portfolio risk intelligence platform for self-directed investors in the United States. The service monitors holdings, filters relevant news across macro, sector, and company levels, and scores downside risk using letter grades (A-F). Clavix delivers a daily digest explaining what changed, what it means, and what actions to consider. It does not provide investment advice, execute trades, or manage portfolios.
+
+## Content Summary
+
+### Marketing Site (https://getclavix.com)
+- Hero section with value proposition and waitlist signup form
+- How it works section (3-step overview)
+- Signals section explaining the action system (Ignore, Monitor, Reduce, Exit, Add)
+- Daily digest section describing the briefing format
+- App screenshots gallery
+- Early access CTA with email signup
+
+### Legal / Informational Pages
+- /privacy - Privacy Policy (operated by Andover Digital LLC, effective April 12 2026)
+- /terms - Terms of Service (binding agreement, arbitration clause, Massachusetts jurisdiction)
+- /refund - Refund and Billing Policy (free trial, 7-day refund guarantee, annual credit policy)
+- /methodology - Methodology (three-layer risk analysis: macro, sector, position; grades A-F; signal actions; data sources; model limitations)
+
+## Key Facts
+
+**Company:** Andover Digital LLC (Massachusetts, USA)
+**Service launched:** 2026
+**Pricing:** Free tier (5 holdings) and paid tier (details available on launch)
+**Age restriction:** 18+ only
+**Jurisdiction:** United States only
+
+## Risk Disclaimer (present on every page footer)
+"Clavix is for informational purposes only and does not provide investment advice. Nothing on this site or in the app constitutes a recommendation to buy, sell, or hold any security. Portfolio risk scores and signal actions are generated algorithmically and may be inaccurate, delayed, or incomplete. Always do your own research and consult a licensed financial advisor before making investment decisions."
+
+## Data Handling
+- No advertising or tracking cookies
+- Session cookies only for authentication
+- Data stored on Supabase (US-hosted)
+- Brokerage connections via read-only OAuth; credentials never stored
+
+## Contact
+support@getclavix.com
+
+## Last Updated
+2026-04-12
