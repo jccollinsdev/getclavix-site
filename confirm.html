@@ -4,31 +4,254 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Confirmed — Clavix</title>
+<meta name="description" content="Your spot on the Clavix waitlist is confirmed." />
 <link rel="icon" type="image/png" href="img/App Logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+ :root {
+ --bg-primary:   #0F1117;
+ --surface:      #161B24;
+ --surface-el:   #1E2530;
+ --border:       #2A3140;
+ --text-pri:     #E8ECF0;
+ --text-sec:     #7A8799;
+ --risk-a:       #1D9E75;
+ --font-ui:      'Inter', sans-serif;
+ --font-mono:    'JetBrains Mono', monospace;
+ }
+
+ html { scroll-behavior: smooth; }
+
  body {
- background: #0F1117;
- color: #E8ECF0;
- font-family: 'Inter', sans-serif;
+ background: var(--bg-primary);
+ color: var(--text-pri);
+ font-family: var(--font-ui);
+ font-weight: 400;
+ -webkit-font-smoothing: antialiased;
  min-height: 100vh;
+ display: flex;
+ flex-direction: column;
+ }
+
+ /* ── NAV ── */
+ nav {
+ position: fixed;
+ top: 0; left: 0; right: 0;
+ z-index: 100;
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ padding: 0 3rem;
+ height: 64px;
+ background: rgba(15,17,23,0.92);
+ backdrop-filter: blur(12px);
+ border-bottom: 0.5px solid var(--border);
+ }
+
+ .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+ .nav-logo img { display: block; height: 36px; width: auto; }
+ .nav-logo-text {
+ font-family: 'Inter', sans-serif;
+ font-weight: 600;
+ font-size: 1.1rem;
+ letter-spacing: 0.12em;
+ color: #FEF5E7;
+ text-transform: uppercase;
+ }
+
+ /* ── CONFIRMATION ── */
+ .confirm-page {
+ flex: 1;
  display: flex;
  align-items: center;
  justify-content: center;
+ padding: 8rem 1.5rem 4rem;
  }
- .msg {
- font-size: 1.5rem;
- font-weight: 500;
+
+ .confirm-card {
+ max-width: 480px;
+ width: 100%;
  text-align: center;
- line-height: 1.5;
  }
- .msg span { color: #1D9E75; }
+
+ .confirm-check {
+ width: 72px;
+ height: 72px;
+ border-radius: 50%;
+ background: rgba(29, 158, 117, 0.1);
+ border: 1.5px solid var(--risk-a);
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ margin: 0 auto 2.5rem;
+ animation: popIn 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+ }
+
+ .confirm-check svg {
+ width: 30px;
+ height: 30px;
+ color: var(--risk-a);
+ }
+
+ @keyframes popIn {
+ 0%   { opacity: 0; transform: scale(0.5); }
+ 100% { opacity: 1; transform: scale(1); }
+ }
+
+ .confirm-kicker {
+ font-size: 0.68rem;
+ letter-spacing: 0.16em;
+ text-transform: uppercase;
+ color: var(--risk-a);
+ margin-bottom: 1.25rem;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ gap: 10px;
+ }
+
+ .confirm-kicker::before,
+ .confirm-kicker::after {
+ content: '';
+ width: 24px;
+ height: 1px;
+ background: var(--risk-a);
+ display: block;
+ }
+
+ .confirm-headline {
+ font-size: clamp(2rem, 5vw, 3rem);
+ font-weight: 400;
+ line-height: 1.12;
+ letter-spacing: -0.02em;
+ margin-bottom: 1.25rem;
+ color: var(--text-pri);
+ }
+
+ .confirm-body {
+ font-size: 1rem;
+ line-height: 1.78;
+ color: var(--text-sec);
+ font-weight: 300;
+ max-width: 380px;
+ margin: 0 auto 3rem;
+ }
+
+ .confirm-back {
+ display: inline-block;
+ font-size: 0.78rem;
+ letter-spacing: 0.1em;
+ text-transform: uppercase;
+ text-decoration: none;
+ color: var(--text-sec);
+ border: 0.5px solid var(--border);
+ padding: 11px 28px;
+ transition: border-color 0.2s, color 0.2s;
+ }
+
+ .confirm-back:hover {
+ border-color: var(--text-sec);
+ color: var(--text-pri);
+ }
+
+ /* ── FOOTER ── */
+ footer {
+ padding: 2.5rem 4rem;
+ border-top: 0.5px solid var(--border);
+ background: var(--bg-primary);
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ flex-wrap: wrap;
+ gap: 1rem;
+ }
+
+ .footer-copy {
+ font-size: 0.72rem;
+ color: var(--text-sec);
+ letter-spacing: 0.04em;
+ }
+
+ .footer-links {
+ display: flex;
+ gap: 2rem;
+ list-style: none;
+ }
+
+ .footer-links a {
+ font-size: 0.72rem;
+ color: var(--text-sec);
+ text-decoration: none;
+ letter-spacing: 0.04em;
+ transition: color 0.2s;
+ }
+
+ .footer-links a:hover { color: var(--text-pri); }
+
+ @media (max-width: 600px) {
+ nav { padding: 0 1.5rem; height: 56px; }
+ .nav-logo img { height: 30px; }
+ .nav-logo-text { font-size: 0.95rem; }
+
+ .confirm-page { padding: 5rem 1.25rem 3rem; }
+ .confirm-check { width: 60px; height: 60px; margin-bottom: 2rem; }
+ .confirm-check svg { width: 26px; height: 26px; }
+ .confirm-headline { font-size: 1.8rem; }
+ .confirm-body { font-size: 0.9rem; }
+
+ footer { padding: 2rem 1.25rem; flex-direction: column; align-items: flex-start; gap: 1rem; }
+ .footer-links { gap: 1.5rem; }
+ }
 </style>
 </head>
 <body>
-<p class="msg">Congrats! Your email is confirmed. 🎉</p>
+
+<!-- NAV -->
+<nav>
+ <a href="/" class="nav-logo">
+ <img src="img/App Logo.png" alt="Clavix" />
+ <span class="nav-logo-text">Clavix</span>
+ </a>
+</nav>
+
+<!-- CONFIRMATION -->
+<main class="confirm-page">
+ <div class="confirm-card">
+ <div class="confirm-check">
+ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+ <polyline points="20 6 9 17 4 12"></polyline>
+ </svg>
+ </div>
+
+ <div class="confirm-kicker">You're in</div>
+
+ <h1 class="confirm-headline">Congrats! Your email is confirmed.</h1>
+
+ <p class="confirm-body">
+ You're officially on the Clavix waitlist. We'll be in touch the moment early access opens.
+ </p>
+
+ <a href="/" class="confirm-back">Back to home</a>
+ </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+ <div style="display:flex;align-items:center;gap:10px;">
+ <img src="img/App Logo.png" alt="Clavix" style="height:28px;width:auto;display:block;opacity:0.85;">
+ <span style="font-family:'Inter',sans-serif;font-weight:600;font-size:0.9rem;letter-spacing:0.12em;color:#FEF5E7;text-transform:uppercase;opacity:0.6;">CLAVIX</span>
+ </div>
+ <span class="footer-copy">&copy; 2026 Clavix. All rights reserved.</span>
+ <ul class="footer-links">
+ <li><a href="/privacy">Privacy</a></li>
+ <li><a href="/terms">Terms</a></li>
+ <li><a href="mailto:support@getclavix.com">Contact</a></li>
+ </ul>
+</footer>
+
 </body>
 </html>
